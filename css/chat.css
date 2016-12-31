@@ -1,0 +1,53 @@
+.smiley_button
+{
+background-image: url('/fileadmin/design/ep/bilder/smilies.png');
+background-repeat: repeat-x;
+width: 15px;
+height: 15px;
+display: inline-block;
+}
+
+
+.bubble 
+{
+position: absolute;
+left: -20px;
+top: -40px;
+width: 190px;
+height: 25px;
+padding: 3px;
+background: #FFFFFF;
+border: #7F7F7F solid 2px;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+opacity: 0.8;
+}
+
+.bubble:after 
+{
+content: "";
+position: absolute;
+bottom: -10px;
+left: 23px;
+border-style: solid;
+border-width: 10px 10px 0;
+border-color: #FFFFFF transparent;
+display: block;
+width: 0;
+z-index: 1;
+}
+
+.bubble:before 
+{
+content: "";
+position: absolute;
+top: 33px;
+left: 22px;
+border-style: solid;
+border-width: 11px 11px 0;
+border-color: #7F7F7F transparent;
+display: block;
+width: 0;
+z-index: 0;
+}

@@ -1,0 +1,78 @@
+#gegnerlinks_userbox_menu, #gegnerrechts_userbox_menu, 
+#gegnerrechts_userbox_submenu_gruss, 
+#gegnerrechts_userbox_submenu_bitte,
+#gegnerrechts_userbox_submenu_du
+{
+	position: relative;
+	top: -75px;
+	left: 25px;
+}
+
+#gegnerlinks_userbox_menu > ul,  #gegnerlinks_userbox_menu > ul > li/*, #gegnerrechts_userbox_menu > ul, li*/ {
+	opacity: 0;
+}
+#gegnerlinks_userbox_menu.circleMenu-open ul > li:first-child, #gegnerrechts_userbox_menu.circleMenu-open ul > li:first-child {
+	opacity: 1;
+}
+
+#gegnerlinks_userbox_menu li a, #gegnerrechts_userbox_menu li a,
+#gegnerlinks_userbox_menu li a, #gegnerrechts_userbox_submenu_gruss li a,
+#gegnerlinks_userbox_menu li a, #gegnerrechts_userbox_submenu_bitte li a,
+#gegnerlinks_userbox_menu li a, #gegnerrechts_userbox_submenu_du li a
+ {
+	font-size: 9pt;
+	font-family: 'ArtifikaMedium';
+	color: #f3ce2d;
+	text-shadow: -1px -1px 0px #700, 1px 1px 0px #300;
+   	width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 40px;
+    display: block;
+
+}
+#gegnerlinks_userbox_menu li a span, #gegnerrechts_userbox_menu li a span,
+#gegnerlinks_userbox_menu li a span, #gegnerrechts_userbox_submenu_gruss li a span,
+#gegnerlinks_userbox_menu li a span, #gegnerrechts_userbox_submenu_bitte li a span,
+#gegnerlinks_userbox_menu li a span, #gegnerrechts_userbox_submenu_du li a span
+ {
+	display:inline;
+    display:inline-table;
+    display:inline-block;
+    vertical-align:middle;
+    line-height: 1;
+    /*margin-top: expression(this.offsetHeight < this.parentNode.offsetHeight ? parseInt((this.parentNode.offsetHeight - this.offsetHeight) / 2) + "px" : "0");*/
+}
+
+ul#gegnerrechts_userbox_menu li:first-child {
+	display: none;
+}
+
+ul.submenu_opened > li:not(.submenu_opened) {
+	opacity: 0.25;
+}
+
+
+ul.circleMenu-closed > li:not(:first-child) {
+	/*opacity: 0;*/
+}
+ul.circleMenu-open > li {
+	background-image: linear-gradient(to bottom, #a33, #660000);
+	border: #600 outset 1px;
+
+	/*opacity: 1;
+*/}
+
+ul.circleMenu-closed li{
+	background-image: linear-gradient(to bottom, #a33, #660000);
+	border: #600 outset 1px;
+	display:none;
+	opacity:0;
+}
+/*
+ul#gegnerrechts_userbox_submenu_bitte:not(ul.circleMenu-open) li,
+ul#gegnerrechts_userbox_submenu_gruss:not(ul.circleMenu-open) li,
+ul#gegnerrechts_userbox_submenu_du:not(ul.circleMenu-open) li,
+ul#gegnerrechts_userbox_menu:not(ul.circleMenu-open) li{
+	display:none;
+}*/

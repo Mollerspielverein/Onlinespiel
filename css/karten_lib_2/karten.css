@@ -1,0 +1,151 @@
+.front {
+  background-color: #ffffff;
+  color:#000;
+  font-size: 20pt;
+  position: absolute;
+  width:  75pt;
+  height: 100pt;
+  height:  100%;
+  width: 100%;
+  -webkit-border-radius: 6%;
+  -moz-border-radius: 6%;
+  -o-border-radius: 6%;
+  border-radius: 6%;
+  border:1pt solid #000;
+  overflow:hidden;
+  background-size:100% 99.5%;
+  -webkit-background-size:99.5%;
+  background-position:center center;
+  background-repeat:no-repeat;
+  -moz-transform: rotateY(0deg);
+  -webkit-transform: rotateY(0eg);
+}
+
+
+@media screen and (max-width:899px) and (max-resolution:130dpi), screen  and (max-width:1299px) and (min-resolution:131dpi){
+	.front {
+		height:  100%;
+		width: 100%;	
+	}
+}
+@media screen and (max-width:899px) and (-webkit-max-device-pixel-ratio:1), screen and (max-width:1299px) and (-webkit-min-device-pixel-ratio:1.5){
+	.front {
+		height:  100%;
+		width: 100%;	
+	}
+}
+
+.front_quer {
+	height:  75pt;
+  width: 100pt;
+  background-color: #ffffff;
+  color:#000;
+  font-size: 20pt;
+  position: absolute;
+  -webkit-border-radius: 5pt;
+  -moz-border-radius: 5pt;
+  -o-border-radius: 5pt;
+  border-radius: 5pt;
+  border:1pt solid #000;
+  overflow:hidden;
+  background-size:100% 99.5%;
+  -webkit-background-size:99.5%;
+  background-position:center center;
+  background-repeat:no-repeat;
+  -moz-transform: rotateY(0deg);
+  -webkit-transform: rotateY(0eg);
+}
+
+@media screen and (max-width:899px) and (max-resolution:130dpi), screen  and (max-width:1299px) and (min-resolution:131dpi){
+	.front_quer {
+		height:  100%;
+		width: 100%;	
+	}
+}
+@media screen and (max-width:899px) and (-webkit-max-device-pixel-ratio:1), screen and (max-width:1299px) and (-webkit-min-device-pixel-ratio:1.5){
+	.front_quer {
+		height:  100%;
+		width: 100%;	
+	}
+}
+
+#zu {background-image:url(png/rotes_pik.png);}
+#zu.graufront {background-image:url(grey/blaues_pik.png);}
+
+#zu_quer{background-image:url(png/rotes_pik_quer.png);}
+#zu_quer.graufront{background-image:url(grey/blaues_pik_quer.png);}
+
+#eA{background-image:url(png/eA.png);}
+#eA.graufront{background-image:url(grey/eA.png);}
+
+#eK{background-image:url(png/eK.png);}
+#eK.graufront{background-image:url(grey/eK.png);}
+
+#eO{background-image:url(png/eO.png);}
+#eO.graufront{background-image:url(grey/eO.png);}
+
+#eU{background-image:url(png/eU.png);}
+#eU.graufront{background-image:url(grey/eU.png);}
+
+#et{background-image:url(png/et.png);}
+#et.graufront{background-image:url(grey/et.png);}
+
+#e9{background-image:url(png/e9.png);}
+#e9.graufront{background-image:url(grey/e9.png);}
+
+#gA{background-image:url(png/gA.png);}
+#gA.graufront{background-image:url(grey/gA.png);}
+
+#gK{background-image:url(png/gK.png);}
+#gK.graufront{background-image:url(grey/gK.png);}
+
+#gO{background-image:url(png/gO.png);}
+#gO.graufront{background-image:url(grey/gO.png);}
+
+#gU{background-image:url(png/gU.png);}
+#gU.graufront{background-image:url(grey/gU.png);}
+
+#gt{background-image:url(png/gt.png);}
+#gt.graufront{background-image:url(grey/gt.png);}
+
+#g9{background-image:url(png/g9.png);}
+#g9.graufront{background-image:url(grey/g9.png);}
+
+#hA{background-image:url(png/hA.png);}
+#hA.graufront{background-image:url(grey/hA.png);}
+
+#hK{background-image:url(png/hK.png);}
+#hK.graufront{background-image:url(grey/hK.png);}
+
+#hO{background-image:url(png/hO.png);}
+#hO.graufront{background-image:url(grey/hO.png);}
+
+#hU{background-image:url(png/hU.png);}
+#hU.graufront{background-image:url(grey/hU.png);}
+
+#ht{background-image:url(png/ht.png);}
+#ht.graufront{background-image:url(grey/ht.png);}
+
+#h9{background-image:url(png/h9.png);}
+#h9.graufront{background-image:url(grey/h9.png);}
+
+#sA{background-image:url(png/sA.png);}
+#sA.graufront{background-image:url(grey/sA.png);}
+
+#sK{background-image:url(png/sK.png);}
+#sK.graufront{background-image:url(grey/sK.png);}
+
+#sO{background-image:url(png/sO.png);}
+#sO.graufront{background-image:url(grey/sO.png);}
+
+#sU{background-image:url(png/sU.png);}
+#sU.graufront{background-image:url(grey/sU.png);}
+
+#st{background-image:url(png/st.png);}
+#st.graufront{background-image:url(grey/st.png);}
+
+#s9{background-image:url(png/s9.png);}
+#s9.graufront{background-image:url(grey/s9.png);}
+
+
+

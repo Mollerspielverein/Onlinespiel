@@ -1,0 +1,294 @@
+/******************************************************************************
+* Miscellaneous styles.                                                       *
+******************************************************************************/
+
+
+#menuefeld
+{
+position:relative;
+background-color: #40a040;
+background-image: linear-gradient(to bottom, #393, #0e560e);  
+width:890px;
+height:620px;
+margin:auto;
+border:1px #006600 outset;
+overflow:visible;
+perspective:700;
+-moz-perspective:700;
+perspective-origin:center center;
+-webkit-perspective:700;
+-webkit-perspective-origin:center center;
+border-radius:5px;
+display:block;
+}
+
+
+
+div.gruenfeld, div.option
+{
+/*	
+	background-color:#070;
+	color:#dd0;
+	border-radius:5px;
+	height:15pt;
+	padding:0px;*/
+	text-align:center;
+	
+  background-color:#060;
+  padding:2px 2px;
+  color:#f3ce2d;
+  font-family:'ArtifikaMedium';
+  text-decoration:none;
+  text-shadow:-1px -1px 0px #070, 1px 1px 0px #030; 
+  border-radius:5px;
+  border:#060 outset 1pt;
+
+}
+
+div.rotfeld
+{
+	border:#c00 outset 2pt;
+	background-color:#700;
+	color:#dd0;
+	border-radius:5px;
+	text-align:center;
+	vertical-align:middle;
+	height:15pt;
+	padding:0px;
+}
+
+div.gelbfeld
+{
+	border:#dd0 outset 2pt;
+	background-color:#dd0;
+	color:#c00;
+	border-radius:5px;
+	text-align:center;
+	vertical-align:middle;
+	height:15pt;
+	padding:0px;
+}
+
+div.iconbutton {
+	
+	width:15px;
+	vertical-align:middle;
+	height:15px;
+	text-align:center;
+
+	background-color:#060;
+	padding:2px 2px;
+	color:#f3ce2d;
+	font-family:'ArtifikaMedium';
+	text-decoration:none;
+	text-shadow:-1px -1px 0px #070, 1px 1px 0px #030; 
+	border-radius:5px;
+	border:#060 outset 1pt;
+	
+	background-image: -moz-linear-gradient(top, #393, #0e560e); /* FF3.6 */
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #393), color-stop(1, #0e560e)); /* Safari 4+, Chrome 2+ */
+	background-image: -webkit-linear-gradient(top, #393, #0e560e); /* Safari 5.1+, Chrome 10+ */
+	background-image: -o-linear-gradient(top, #393, #0e560e); /* Opera 11.1+ */
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#393', endColorstr='#0e560e'); /* IE6,IE7 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#393', endColorstr='#0e560e')"; /* IE8+ */
+	background-image: linear-gradient(to bottom, #393, #0e560e); 
+}
+
+div.iconbutton:hover {
+	
+	border:#060 inset 1px;
+  
+	background-image: -moz-linear-gradient(top, #0e560e, #393); /* FF3.6 */
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #0e560e), color-stop(1, #393)); /* Safari 4+, Chrome 2+ */
+	background-image: -webkit-linear-gradient(top, #0e560e, #393); /* Safari 5.1+, Chrome 10+ */
+	background-image: -o-linear-gradient(top, #0e560e, #393); /* Opera 11.1+ */
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#0e560e', endColorstr='#393'); /* IE6,IE7 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#0e560e', endColorstr='#393')"; /* IE8+ */
+	background-image: linear-gradient(to bottom, #0e560e, #393); 
+}
+
+div.optionlayer{
+  text-align:left;
+  
+  border:#333 outset 1px;
+  background-color:#ddd; /*ffb eea dd9 cc8 bb7 aa6 995*/
+  
+  background-image: -moz-linear-gradient(top, #ccc, #fff); 
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eee), color-stop(1, #ddd)); 
+  background-image: -webkit-linear-gradient(top, #eee, #ddd); 
+  background-image: -o-linear-gradient(top, #eee, #ddd); 
+  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#eee', endColorstr='#ddd'); 
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#eee', endColorstr='#ddd')"; 
+  background-image: linear-gradient(to bottom, #ccc, #fff);   
+  display:none;
+  
+  padding:10px;
+  border-radius:5px;
+  color:#000;
+  font-family:sans-serif;
+  z-index:10000;
+}
+
+div.namenlabel
+{
+left:0pt;
+vertical-align:middle;
+font-size:20pt;
+}
+
+div.spielermensch
+{
+left:16%;
+}
+
+div.computerleicht
+{
+left:33%;
+}
+
+div.computermittel
+{
+left:50%;
+}
+div.computerschwer
+{
+left:67%;
+}
+div.computerzufall
+{
+left:84%;
+}
+
+div.option
+{
+cursor:pointer;
+}
+
+div.option_aktiv
+{
+	border:#aa0 inset 2pt;
+	background-color:#dd0;
+	color:#000;
+	border-radius:5pt;
+	cursor:pointer;
+}
+
+div.option_inaktiv
+{
+color:#777;
+cursor:default;
+}
+
+
+
+#titel
+{
+position:absolute;
+width:190pt;
+height:80pt;
+
+position:absolute;
+left:39%;
+top:1%;
+/*left:calc(50% - 196pt);
+left:-moz-calc(50% - 196pt);
+left:-webkit-calc(50% - 196pt);*/
+
+/*top:calc(50% - 108pt);
+top:-moz-calc(50% - 108pt);
+top:-webkit-calc(50% - 108pt);*/
+
+padding:5pt;
+
+vertical-align:middle;
+}
+
+#titel > img
+{
+border-bottom: solid 1px #dd0;
+}
+
+
+#version
+{
+position:absolute;
+height:15pt;
+padding:0px;
+width:70pt;
+right:1%;
+top:1%;
+}
+
+#spieler1frame, #spieler3frame, #spieler2frame, #unterframe
+{
+position:absolute;
+width:95%;
+height:70pt;
+/*border:1px solid #dd0;*/
+}
+
+#spieler1frame > div, #spieler3frame > div, #spieler2frame > div, #unterframe > div:not([id="startfeld"])
+{
+/*border:1px solid #000;*/
+height:96%;
+width:16%;
+position:absolute;
+text-align:center;
+vertical-align:middle;
+}
+
+#unterframe > div
+{
+height:96%;
+position:absolute;
+}
+
+#spieler1frame
+{
+position:absolute;
+top: 25%;
+left:1%;
+}
+
+#spieler2frame
+{
+position:absolute;
+top: 44%;
+left:1%;
+}
+
+#spieler3frame
+{
+position:absolute;
+top: 63%;
+left:1%;
+}
+
+#unterframe
+{
+position:absolute;
+bottom: 1%;
+left:1%;
+}
+
+#anzeigefeld
+{
+position:absolute;
+left:0;
+top:0;
+width:350pt;
+}
+
+#startfeld
+{
+position:absolute;
+right:3%;
+width:10%
+}
+
+#startfeld > p
+{
+position:relative;
+top:9pt;
+font-size:15pt;
+}

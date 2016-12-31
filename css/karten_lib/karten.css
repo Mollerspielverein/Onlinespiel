@@ -1,0 +1,115 @@
+/******************************************************************************
+* Styles for playing cards.                                                   *
+******************************************************************************/
+
+.back {
+  background-image: url("graphics/cardback.gif");
+  /*border-color: #808080 #000000 #000000 #808080;*/
+  border:1pt solid #000;
+  font-size: 20pt;
+  position: absolute;
+  width:  75pt;
+  height: 100pt;
+    -webkit-border-radius: 10pt;
+    -moz-border-radius: 10pt;
+	-o-border-radius: 10pt;
+    border-radius: 10pt;
+  /*
+    width:  3.75em;
+  height: 5.00em;*/
+  backface-visibility:visible;
+  -webkit-backface-visibility:visible;
+}
+
+.back_quer {
+  background-image: url("graphics/cardback.gif");
+  /*border-color: #808080 #000000 #000000 #808080;
+  border-style: solid;*/
+  font-size: 20pt;
+  position: absolute;
+  width: 100pt;
+  height: 75pt;
+    -webkit-border-radius: 10pt;
+    -moz-border-radius: 10pt;
+	-o-border-radius: 10pt;
+    border-radius: 10pt;
+	  border:1pt solid #000;
+}
+
+.front {
+  background-color: #ffffff;
+  color:#000;
+  font-size: 20pt;
+  position: absolute;
+  width:  75pt;
+  height: 100pt;
+  -webkit-border-radius: 10pt;
+  -moz-border-radius: 10pt;
+  -o-border-radius: 10pt;
+  border-radius: 10pt;
+  border:1pt solid #000;
+  overflow:hidden;
+}
+
+.front, .front * {
+  -webkit-backface-visibility:hidden;
+   backface-visibility:hidden;
+}
+
+.red { color: #ff0000; }
+
+.index {
+  font-size: 50%;
+  font-weight: bold;
+  text-align: center;
+  position: absolute;
+  left: 0.25em;
+  top:  0.25em;
+  background:transparent;
+}
+
+.ace {
+  font-size: 300%;
+  width:100%;
+  height:100%;
+  text-align:center;
+  padding-top:18%;
+  background:transparent;
+}
+
+.face {
+  border: 1pt solid #000000;
+  position: absolute;
+  left: 0.50em;
+  top:  0.45em;
+  width:  2.6em;
+  height: 4.0em;
+}
+
+.spotA1 { position: absolute; left: 0.60em; top: 0.5em; }
+.spotA2 { position: absolute; left: 0.60em; top: 1.5em; }
+.spotA3 { position: absolute; left: 0.60em; top: 2.0em; }
+.spotA4 { position: absolute; left: 0.60em; top: 2.5em; }
+.spotA5 { position: absolute; left: 0.60em; top: 3.5em; }
+
+.spotB1 { position: absolute; left: 1.55em; top: 0.5em; }
+.spotB2 { position: absolute; left: 1.55em; top: 1.0em; }
+.spotB3 { position: absolute; left: 1.55em; top: 2.0em; }
+.spotB4 { position: absolute; left: 1.55em; top: 3.0em; }
+.spotB5 { position: absolute; left: 1.55em; top: 3.5em; }
+
+.spotC1 { position: absolute; left: 2.50em; top: 0.5em; }
+.spotC2 { position: absolute; left: 2.50em; top: 1.5em; }
+.spotC3 { position: absolute; left: 2.50em; top: 2.0em; }
+.spotC4 { position: absolute; left: 2.50em; top: 2.5em; }
+.spotC5 { position: absolute; left: 2.50em; top: 3.5em; }
+
+.graufront, .graufront div
+{
+	color:#555;
+}
+
+.graufront
+{
+	background-color: #aaa;
+}

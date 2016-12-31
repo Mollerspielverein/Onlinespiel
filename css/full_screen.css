@@ -1,0 +1,991 @@
+/******************************************************************************
+* Miscellaneous styles.                                                       *
+******************************************************************************/
+
+body {
+  
+  
+background-color:#555;/*#40a040;*/
+
+background-image: -moz-linear-gradient(top, #fff, #ccc); /* FF3.6 */
+background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #fff), color-stop(1, #ccc)); /* Safari 4+, Chrome 2+ */
+background-image: -webkit-linear-gradient(top, #fff, #ccc); /* Safari 5.1+, Chrome 10+ */
+background-image: -o-linear-gradient(top, #fff, #ccc); /* Opera 11.1+ */
+filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#cccccc'); /* IE6,IE7 */
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#cccccc')"; /* IE8+ */
+background-image: linear-gradient(to bottom, #fff, #ccc);
+height:100%;
+font-size:100%;
+overflow:scroll;
+font-family:'ArtifikaMedium';
+color:#cc0;
+}
+
+#spielfeld_container{
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+
+#ratio_keeper{
+  padding-top:78.78%
+}
+
+#spielfeld
+{
+position:absolute;
+left:0;
+top:0;
+background-color: #40a040;
+
+background-image: -moz-linear-gradient(top, #339933, #0e560e); /* FF3.6 */
+background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #339933), color-stop(1, #0e560e)); /* Safari 4+, Chrome 2+ */
+background-image: -webkit-linear-gradient(top, #339933, #0e560e); /* Safari 5.1+, Chrome 10+ */
+background-image: -o-linear-gradient(top, #339933, #0e560e); /* Opera 11.1+ */
+filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#339933', endColorstr='#0e560e'); /* IE6,IE7 */
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#339933', endColorstr='#0e560e')"; /* IE8+ */
+background-image: linear-gradient(to bottom, #339933, #0e560e);
+  
+width:100%;
+height: 90%;
+margin:auto;
+border:1px #006600 outset;
+overflow:hidden;
+perspective:700;
+-moz-perspective:700;
+perspective-origin:center center;
+-webkit-perspective:700;
+-webkit-perspective-origin:center center;
+display:block;
+-webkit-box-sizing:border-box;
+-moz-box-sizing:border-box;
+-ms-box-sizing:border-box;
+-o-box-sizing:border-box;
+box-sizing:border-box;
+/*box-shadow: 20pt 20pt 10pt #999999;*/
+}
+
+#stapel{
+position:absolute;
+top:40pt;
+text-align:center;
+z-index:2;
+margin:auto 400pt;
+}
+
+/*****************************************************************
+**  
+**    Bank
+**
+*****************************************************************/
+
+#mittelfeld{
+  height:100%;
+  width:100%;
+}
+
+#bankframe
+{
+position:absolute;
+left:31.37%;
+top:29%; /*23.67%;*/
+z-index:10;
+width:45.48%;
+height:34.43%;
+}
+
+#bank{
+position:absolute;
+width:100%;
+height:100%;
+
+left:0;
+top:4.3%;
+
+border-radius:5pt;
+padding:0pt 0 0 0;
+overflow:visible ;
+}
+
+/**    Stapel    **/
+
+#bank > div {
+  width:  25.86%;
+  height: 62.44%;
+}
+
+#bank > div#ba_1z
+{
+  position:absolute;
+  left:6.9%;
+  bottom:12.49%;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  
+}
+
+#bank > div#ba_2z
+{
+  position:absolute;
+  left:52.76%;
+  top:-56.2%;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+}
+
+#bank > div#ba_3z
+{
+  position:absolute;
+  left:55.17%;
+  bottom:7.49%;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+}
+
+#bank > div#ba_1a
+{
+  position:absolute;
+  left:6.21%;
+  bottom:4.37%;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  
+}
+
+#bank > div#ba_2a
+{
+  position:absolute;
+  left:55.17%;
+  top:-49.95%;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  
+}
+
+#bank > div#ba_3a
+{
+  position:absolute;
+  left:58.62%;
+  bottom:6.24%;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+}
+
+div#ba_3n, div#ba_2n, div#ba_1n{
+  position:absolute;
+  height:13.49%;
+  width:6.9%;
+  display:none;  
+  font-size:15pt;
+  text-align:center;
+}
+
+#bank > div#ba_1n
+{
+  left:36.21%;
+  top:28.1%;
+  
+}
+
+
+
+#bank > div#ba_2n
+{
+  left:48.62%;
+  top:6.24%;
+}
+
+#bank > div#ba_3n
+{
+  left:48.28%;
+  top:24.98%;
+}
+
+
+/*******************************************************************
+
+    Zusatzfelder
+
+********************************************************************/
+
+
+
+#hilfeframe
+{
+height:25pt;
+width:80pt;
+position:absolute;
+left:5pt;
+top:5pt;
+}
+
+#StapelTausch
+{
+position:absolute;
+width:32pt;
+height:32pt;
+left:103pt;
+top:5pt;
+display:none;
+cursor:help;
+border-radius:5px;
+}
+
+/*****************************************************************
+**  
+**    Gegnerlinks
+**
+*****************************************************************/
+
+#gegnerlinksframe{
+position:absolute;
+top:16%;
+left:1.57%;
+width:16.47%;
+height:61.33%;
+}
+
+#gegnerlinks{
+position:absolute;
+top:4.3%;
+left:1.19%;
+text-align:center;
+
+padding:1.57%;
+width:100%;
+height:100%;
+
+}
+
+#gegnerlinks > div {
+  transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  margin-left:20%;
+  width:71.43%;
+  height:35.09%;
+}
+
+#gegnerlinks > div > div{
+  position:absolute;
+  width:100%;
+  height:100%;
+}
+
+
+#gegnerlinks > div > div:last-child{
+    position:absolute;
+  left:9.52%;
+  top:3.51%;  
+}
+
+/*****************************************************************
+**  
+**    Gegner rechts
+**
+*****************************************************************/
+
+#gegnerrechtsframe{
+position:absolute;
+top:8%;
+right:1.57%;
+width:16.47%;
+height:61.33%;
+}
+
+#gegnerrechts{
+position:absolute;
+top:4.3%;
+right:1.57%;
+text-align:center;
+
+padding:1.57%;
+
+width:100%;
+height:100%;
+}
+
+#gegnerrechts > div{
+  transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  margin-left:3.14%;
+  width:71.43%;
+  height:35.09%;
+}
+
+#gegnerrechts > div > div
+{
+  position:absolute;
+  width:100%;
+  height:100%;
+}
+
+#gegnerrechts > div > div:last-child
+{
+  position:absolute;
+  left:9.52%;
+  top:3.51%;  
+}
+
+
+
+
+/*****************************************************************
+**  
+**    Spieler
+**
+*****************************************************************/
+
+#spielerframe
+{
+position:absolute;
+left:32.94%;
+bottom:5.5%;
+height:27.98%;
+width:45.48%;
+}
+
+#spieler{
+position:absolute;
+left:0;
+width:100%;
+height:100%;
+top:4.3%;
+
+padding:0pt;
+}
+
+#spieler > div{
+  position:absolute;
+  width:25.86%;
+  height:76.92%;
+}
+
+#spieler > div#sp_1
+{
+  left:3.45%;
+  top:7.69%;
+}
+
+#spieler > div#sp_2
+{
+  left:35.52%;
+  top:7.69%;
+}
+
+#spieler > div#sp_3
+{
+  left:67.59%;
+  top:7.69%;
+}
+
+#spieler > div > div
+{
+  position:relative;
+  width:  100%;
+  height: 100%;
+}
+
+#spieler > div > div:last-child
+{
+  position:absolute;
+  left:10%;
+  top:7.5%;
+}
+
+
+
+/*****************************************************************
+**  
+**    Beschriftungen
+**
+*****************************************************************/
+
+#bank_arrays, #bank_ueberschrift
+{
+position:absolute;
+
+left:0;
+/*left:calc(50% - 196pt);
+left:-moz-calc(50% - 196pt);
+left:-webkit-calc(50% - 196pt);*/
+
+top:0;
+/*top:calc(50% - 170pt);
+top:-moz-calc(50% - 170pt);
+top:-webkit-calc(50% - 170pt);*/
+
+width:45.48%;
+}
+
+#gegnerlinks_arrays,
+#gegnerlinks_ueberschrift
+{
+position:absolute;
+top:-23.5%;
+/*top:calc(50% + 250pt);
+top:-moz-calc(50% + 250pt);
+top:-o-calc(50% + 250pt);
+top:-webkit-calc(50% + 250pt);*/
+left:15%;
+
+width:105pt;
+width:69.09%;
+height:5.26%;
+}
+
+#gegnerrechts_arrays,
+#gegnerrechts_ueberschrift
+{
+position:absolute;
+top:108%;
+/*top:calc(50% + 250pt);
+top:-moz-calc(50% + 250pt);
+top:-o-calc(50% + 250pt);
+top:-webkit-calc(50% + 250pt);*/
+right:15%;
+width:69.09%;
+height:5.26%;
+}
+
+#spieler_arrays,
+#spieler_ueberschrift
+{
+position:absolute;
+top:38%;
+left:-27%;
+width: 25.08%;
+height:11.52%;
+/*left:calc(50% - 196pt);
+left:-moz-calc(50% - 196pt);
+left:-webkit-calc(50% - 196pt);*/
+}
+
+p.userbox_bild {
+  width:100%;
+  height:519.74%;
+}
+
+p.userbox_bild img {
+  max-width:100%;
+  max-height:96.2%;
+}
+
+p.userbox_name {
+  
+background-color:#800;
+background-image: -moz-linear-gradient(top, #a33, #600); /* FF3.6 */
+background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #a33), color-stop(1, #600)); /* Safari 4+, Chrome 2+ */
+background-image: -webkit-linear-gradient(top, #a33, #600); /* Safari 5.1+, Chrome 10+ */
+background-image: -o-linear-gradient(top, #a33, #600); /* Opera 11.1+ */
+filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#aa3333', endColorstr='#660000'); /* IE6,IE7 */
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#aa3333', endColorstr='#660000')"; /* IE8+ */
+background-image: linear-gradient(to bottom, #a33, #600);
+border-radius:5px;
+  
+}
+
+p.userbox_name.spieler_aktiv {
+
+text-shadow: -1px -1px 0 #bfbf00, 1px 1px 0 #666600;
+color: #aa0000;
+ 
+background-color:#800;
+background-image: -moz-linear-gradient(top, #DDDD33, #AAAA00); /* FF3.6 */
+background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #DDDD33), color-stop(1, #AAAA00)); /* Safari 4+, Chrome 2+ */
+background-image: -webkit-linear-gradient(top, #DDDD33, #AAAA00); /* Safari 5.1+, Chrome 10+ */
+background-image: -o-linear-gradient(top, #DDDD33, #AAAA00); /* Opera 11.1+ */
+filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#DDDD33', endColorstr='#AAAA00'); /* IE6,IE7 */
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#DDDD33', endColorstr='#AAAA00')"; /* IE8+ */
+background-image: linear-gradient(to bottom, #DDDD33, #AAAA00);
+border-radius:5px;
+  
+  
+  
+}
+
+#moellerstapel_arrays,
+#moellerstapel_ueberschrift
+{
+position:absolute;
+
+left:0;
+/*left:calc(50% - 100pt);
+left:-moz-calc(50% - 100pt);
+left:-webkit-calc(50% - 100pt);*/
+top:0;
+
+width:150pt;
+/*border:red solid 1pt;
+background-color:#700;
+color:#cc0;*/
+border-radius:5pt;
+
+text-align:center;
+vertical-align:middle;
+}
+
+
+#spieler_arrays, #gegnerrechts_arrays, #gegnerlinks_arrays, #bank_arrays, #moellerstapel_arrays,#spieler_ueberschrift, #gegnerrechts_ueberschrift, #gegnerlinks_ueberschrift, #bank_ueberschrift, #moellerstapel_ueberschrift, #protokoll, #queue_protokoll, #letzter_stich_ueberschrift
+{
+  /*border:#c00 outset 2pt;
+  background-color:#700;
+  color:#dd0;*/
+  border-radius:5pt;
+  text-align:center;
+  vertical-align:middle;
+  padding:0px;
+  text-shadow: -1px -1px 0 #990000, 1px 1px 0 #330000;
+}
+
+#spieler_arrays, #gegnerrechts_arrays, #gegnerlinks_arrays, #bank_arrays, #moellerstapel_arrays,#spieler_arrays
+{
+  opacity:0;
+  cursor:pointer;
+  display:none;
+}
+
+
+
+/*****************************************************************
+**  
+**    Hervorhebung
+**
+*****************************************************************/
+
+
+#spieler.spieler_aktiv, #gegnerrechts.spieler_aktiv, #gegnerlinks.spieler_aktiv
+{
+  /*border-radius:5px;
+  background-image:-moz-radial-gradient(ellipse closest-side, #dd0, rgba(221,221,0,0.3)); 
+  background-image:-webkit-radial-gradient(ellipse closest-side, #dd0, rgba(221,221,0,0.3)); 
+  background-image:-opera-radial-gradient(ellipse closest-side, #dd0, rgba(221,221,0,0.3)); 
+  background-image:radial-gradient(ellipse closest-side, #dd0, rgba(221,221,0,0.3)); */
+  
+}
+
+/*
+#spieler_arrays:hover, #gegnerrechts_arrays:hover, #gegnerlinks_arrays:hover, #bank_arrays:hover, #moellerstapel_arrays:hover,#spieler_arrays:hover
+{
+  opacity:1;
+  cursor:pointer;
+}*/
+
+#protokoll{
+right:0pt;
+bottom:0pt;
+display:none;
+}
+
+#queue_protokoll{
+left:0pt;
+bottom:0pt;
+display:none;
+}
+
+/********************************************************
+*
+*    Stichstapel
+*
+********************************************************/
+
+#stichstapel_spieler{
+position:absolute;
+left:15%;
+bottom:-17%;
+width:11.79%;
+height:21.52%;
+background:transparent;
+}
+
+#stichstapel_gegnerlinks{
+-webkit-transform: rotate(90deg);
+-moz-transform: rotate(90deg);
+transform: rotate(90deg);
+position:absolute;
+top:-3%;
+left:-11.3%;
+width:11.79%;
+height:21.52%;
+background:transparent;
+padding-left:-30pt;
+}
+
+#stichstapel_gegnerrechts{
+-webkit-transform: rotate(-90deg);
+-moz-transform: rotate(-90deg);
+transform: rotate(-90deg);
+position:absolute;
+top:70%;
+right:-11.3%;
+width:11.79%;
+height:21.52%;
+background:transparent;
+}
+
+#stichstapel_spieler > *{
+padding:0;
+margin:0;
+}
+
+#protokoll, #queue_protokoll
+{
+position:absolute;
+width:50%;
+height:125pt;
+overflow:auto;
+text-align:left;
+background:#070;
+cursor:pointer;
+opacity:1;
+}
+
+#queue_protokoll
+{
+opacity:1;
+cursor:default;
+}
+
+#protokoll p,#queue_protokoll p{
+margin:0;
+padding:0;
+}
+
+#kartenbilder
+{
+  opacity:0.0;
+  position:absolute;
+}
+
+#gegnerrechts > div > div, #gegnerlinks > div > div, #spieler > div > div, #moeller, #ziehstapel > div, #bank > div > div, .ui-droppable:not([id="spielfeld"]), .ui-draggable
+{
+    -webkit-border-radius: 6%;
+    -moz-border-radius: 6%;
+  -o-border-radius: 6%;
+    border-radius: 6%;
+  overflow:visible ;
+}
+
+#gegnerrechts > div,#gegnerlinks > div
+{
+  /*margin-left:10pt;
+  margin-top:-5pt;*/
+}
+
+
+
+#spieler, #gegnerlinks, #gegnerrechts, #moellerstapel, #bank, .ui-dialog-content, #StapelTausch
+{
+  /*border:#070 outset 2pt;
+  background-color:#070;
+  border-radius:5pt;*/
+}
+
+
+/*****************************************************************
+**  
+**    Møllerstapel
+**
+*****************************************************************/
+
+
+#moellerstapelframe
+{
+position:absolute;
+left:29%;
+top:5%;
+transform: rotate(135deg);
+-webkit-transform: rotate(135deg);
+-moz-transform: rotate(135deg);
+  width:23.53%;
+  height:29.05%;
+}
+
+#moellerstapel
+{
+  position:absolute;
+
+  left:0;
+  top:1.08%;
+  width:100%;
+  height:100%;
+
+}
+
+#moeller
+{
+  position:absolute;
+  top:7.41%;
+  left:26.67%;
+  width:50.13%;
+  height:74.07%;
+}
+
+#ziehstapel
+{
+  position:absolute;
+  border:0pt solid blue;
+  width:  66.67%;
+  height: 55.69%;
+  top:30%;
+  left:15%;
+}
+
+.ui-droppable, .ui-draggable
+{
+  cursor:pointer;  
+}
+
+.ui-draggable-disabled {cursor:default;}
+
+*:not(.ui-dialog).ui-draggable-dragging
+{
+  z-index:1000;
+  cursor:move;
+}
+
+#dialog
+{
+display:none;
+text-align:left;
+padding:0;
+}
+
+#dialog p
+{
+padding:5pt;
+margin:0;
+}
+
+.ui-dialog-titlebar-close 
+{
+position:absolute;
+right:5pt;
+color:#cc0;
+text-decoration:none;
+font-family:sans-serif;
+font-weight:bold;
+}
+
+#bg_schrift
+{
+  position:absolute;
+  top:5%;
+  left:0%;
+  width:100%;
+  height:100%;
+  color:#cc0;
+  font-family:'ArtifikaMedium';
+  font-size:300pt;
+  padding:0pt;
+  margin:auto;
+  text-align:right;
+  opacity:0.25;
+  text-shadow:#cc0 0 0 10pt, #fff 5px 5px 10pt;
+  overflow:hidden;
+}
+
+/*
+#letzter_stichframe
+{
+  position:absolute;
+  right:40%;
+  top:20%;
+  display:none;
+  cursor:pointer;
+  width:120pt;
+}
+
+#letzter_stich
+{
+height:31.37%;
+width:11.79%;
+  top:17pt;
+  position:absolute;
+}
+*/
+
+#letzter_stichframe
+{
+  position:absolute;
+  right:40%;
+  top:20%;
+  display:none;
+  cursor:pointer;
+  width:18.82%;
+  height:25.81%;
+}
+
+#letzter_stich
+{
+  width:62.5%;
+  height:83.13%;
+  top:10.63%;
+  position:absolute;
+}
+
+.karte_ziehbar
+{
+  border:4px solid #ff0;
+}
+
+.karte_aktiv
+{
+  border:4px solid #0f0;
+}
+
+#sp_1a.karte_aktiv,
+#sp_2a.karte_aktiv,
+#sp_3a.karte_aktiv,
+#gr_1a.karte_aktiv,
+#gr_2a.karte_aktiv,
+#gr_3a.karte_aktiv,
+#gl_1a.karte_aktiv,
+#gl_2a.karte_aktiv,
+#gl_3a.karte_aktiv
+{
+    box-shadow:5pt 5pt 15pt 5pt #101010;
+    
+}
+
+div#ba_1a.bank_leer, div#ba_2a.bank_leer, div#ba_3a.bank_leer{
+  border:2pt dashed #dd0;
+}
+
+.stapel_drehbar
+{
+  cursor:alias;
+}
+
+
+#spielform
+{
+position:absolute;
+height:25pt;
+padding:3px 0 0 0;
+width:120pt;
+right:1%;
+top:1%;
+}
+
+/*#neustart
+{
+cursor:pointer;
+position:absolute;
+height:15pt;
+padding:0px;
+width:120pt;
+left:1%;
+top:1%;
+}*/
+
+.move_karte
+{
+position:absolute;
+left:0;
+top:0;
+display:none;
+height:21.52%;
+width:11.79%;
+}
+
+.move_karte > .move_karte{
+  height:100%;
+  width:100%;
+}
+
+.move_karte_sichtbar
+{
+position:absolute;
+left:0;
+top:0;
+display:block;
+height:21.52%;
+width:11.79%;
+}
+
+.move_karte_sichtbar > .move_karte_sichtbar{
+  height:100%;
+  width:100%;
+}
+
+
+.move_karte_sichtbar > div.front
+{
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  box-shadow:5pt 5pt 5pt 2pt #101010;
+}
+
+.move_karte_sichtbar > div#zu
+{
+  backface-visibility:visible;
+  -webkit-backface-visibility:visible;
+  box-shadow:5pt 5pt 5pt 2pt #101010;
+}
+
+div#StapelTausch.tauschbutton_grau
+{
+  color:#777;
+  background-image:url(../bilder/cursor/stapel_drehen_klein_grau.png);
+  background-position:center center;
+  background-repeat:no-repeat;
+  width:32pt;
+  height:32pt;
+}
+
+div#StapelTausch.spieler_aktiv
+{
+  background-image:url(../bilder/cursor/stapel_drehen_klein.png);
+  color:#700;
+  background-position:center center;
+  background-repeat:no-repeat;
+  width:32pt;
+  height:32pt;
+}
+
+
+#StapelTausch:active
+{
+  border-style:inset;
+}
+
+
+/*****************************************/
+
+#gamehelper{
+  
+display:none;
+}
+
+div#settings, div#bugreport{
+position:absolute;
+left:5px;
+top:5px;
+width:400px;
+height:360px;
+overflow: hidden;
+z-index:10000;
+}
+
+/*****************************************/
+
+#Tutorialnavigation{
+  display:none;
+  width:100%;
+}
