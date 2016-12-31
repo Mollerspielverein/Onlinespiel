@@ -1,0 +1,15 @@
+/* 
+    Document   : firefox_komp
+    Created on : 07.06.2013, 19:51:31
+    Author     : ralf
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+p { 
+
+}
+
+div#tut_Beschreibung p, div#tut_Beschreibung li{
+	font-size:9.7pt;
+}

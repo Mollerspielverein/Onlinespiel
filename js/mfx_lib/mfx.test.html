@@ -1,0 +1,43 @@
+﻿<!Doctype html>
+<html>
+<head>
+<title>mfx_queue_lib Test</title>
+<meta charset="UTF-8">
+<link rel="icon" href="../index/bilder/favicon.png" type="image/png" />
+
+<script type="text/JavaScript" src="../../js/jquery/jquery.min.js"></script>
+<script type="text/JavaScript" src="mfx_queue_lib.js"></script>
+<script type="text/JavaScript" src="mfx_ueberwachung_lib.js"></script>
+</head>
+<body>
+<h1>mFX-Protokoll</h1>
+<div id="mfx_protokoll"></div>
+<h1>Ausgabe</h1>
+<p id="schreiben"></p>
+
+<script type="text/JavaScript">
+
+
+
+mfx_protokoll(oMfxQueue);
+
+function ha(a)
+{
+	//$("#schreiben").text(a);
+	$('#schreiben').append("<p>"+a+"</p>");
+}
+
+function hq(a)
+{
+	ha(a);
+	//setTimeout(oMfxQueue.dequeue,1000);
+	oMfxQueue.dequeue();
+	
+}
+
+oMfxQueue.delay(1000).queue(hq,[1]).queue(hq,[2]).queue(hq,[3]).delay(2000).queue(hq,["Hallo"]);
+
+
+</script>
+</body>
+<html>
