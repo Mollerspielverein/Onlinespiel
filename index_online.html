@@ -1,0 +1,395 @@
+<!Doctype html>
+<html>
+<head>
+<title>Wir woll'n den M&oslash;ller seh'n (M&oslash;ller 0.3.6)</title>
+<meta charset="UTF-8">
+
+<!--
+<link rel="icon" href="bilder/favicon.png" type="image/png" />
+<link href="../index/font/Artifika/stylesheet.css" rel="stylesheet" type="text/css" />
+<link href="css/custom-theme/jquery-ui-1.9.1.custom.css" rel="stylesheet" type="text/css" />
+<link href="css/karten_lib_2/karten.css" rel="stylesheet" type="text/css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/menue.css" rel="stylesheet" type="text/css" />
+<link href="css/animation.css" rel="stylesheet" type="text/css" />
+<link href="css/moeller_dokumente.css" rel="stylesheet" type="text/css" />
+
+<script type="text/JavaScript" src="js/zus_lib/stacktrace.js"></script>
+<script type="text/JavaScript" src="js/zus_lib/zus_lib.js"></script>
+<script type="text/JavaScript" src="js/moeller_mvc_lib/ereignis.js"></script>
+<script type="text/JavaScript" src="js/jquery/jquery.min.js"></script>
+<script type="text/JavaScript" src="js/jquery/jquery-ui.js"></script>
+<script type="text/JavaScript" src="js/zus_lib/debug_lib.js"></script>
+
+<script type="text/JavaScript" src="js/moeller_mvc_lib/modell2.js"></script> 
+<script type="text/JavaScript" src="js/moeller_mvc_lib/view.js"></script>
+<script type="text/JavaScript" src="js/moeller_mvc_lib/controller.js"></script>
+<script type="text/JavaScript" src="js/moeller_mvc_lib/ki.js"></script> 
+
+<script type="text/JavaScript" src="js/moeller_lib/start_logik.js"></script>
+<script type="text/JavaScript" src="js/moeller_lib/start_ui.js"></script>
+
+-->
+
+<!-- <link rel="stylesheet" type="text/css" href="typo3temp/stylesheet_47451df94e.css?1367594264" media="all"> -->
+
+<link rel="stylesheet" type="text/css" href="css/custom-theme/jquery-ui-1.9.1.custom.css" media="all">
+<link rel="stylesheet" type="text/css" href="styles/firefox_komp.css" media="all">
+<link rel="stylesheet" type="text/css" href="font/Artifika/stylesheet.css" media="all">
+<link rel="stylesheet" type="text/css" href="font/Crimson/stylesheet.css" media="all">
+<link rel="stylesheet" type="text/css" href="styles/moeller_dokumente.css" media="all">
+<link rel="stylesheet" type="text/css" href="css/karten_lib_2/karten.css" media="all">
+<link rel="stylesheet" type="text/css" href="css/style.css" media="all">
+<link rel="stylesheet" type="text/css" href="css/menue.css" media="all">
+<link rel="stylesheet" type="text/css" href="css/animation.css" media="all">
+
+
+
+<script src="js/jquery/jquery-1.11.2.js" type="text/javascript"></script>
+<script src="js/jquery/jquery-ui.js" type="text/javascript"></script>
+<script src="js/login.js?1376303967" type="text/javascript"></script>
+<script src="js/zus_lib/stacktrace.js" type="text/javascript"></script>
+<script src="js/zus_lib/zus_lib.js" type="text/javascript"></script>
+<script src="js/moeller_mvc_lib/ereignis.js" type="text/javascript"></script>
+<script src="js/zus_lib/debug_lib.js" type="text/javascript"></script>
+<script src="js/effects.js?1371574770" type="text/javascript"></script>
+<script src="js/moeller_mvc_lib/modell2.js" type="text/javascript"></script>
+<script src="js/moeller_mvc_lib/view.js" type="text/javascript"></script>
+<script src="js/moeller_mvc_lib/controller.js" type="text/javascript"></script>
+<script src="js/moeller_mvc_lib/ki.js" type="text/javascript"></script>
+<script src="js/moeller_lib/start_logik_03.js" type="text/javascript"></script>
+
+
+</head>
+<body onload="">
+<!-- ###DOKUMENT### start---> 
+
+<div id="Kopf">
+  <p id="speznavi">
+  <!-- ###LOGININFO### start-->
+    Login Registrieren
+  <!-- ###LOGININFO### ende--->  
+    
+  <!-- ###SPEZNAVI### start--->  
+    Einstellungen
+  <!-- ###SPEZNAVI### ende--->  
+  </p>
+  <p id="gruss">
+    <!-- ###USERBILD### start -->
+    <!-- ###USERBILD### end -->
+    
+    ###LOGINNAME###
+  </p>
+  <p id="bannerline"><img src="bilder/pik_version2.png"><span class="gross">&nbsp;Møller ~ Das Kartenspiel</span></p>
+</div>
+<div id="Navi">
+<!-- ###NAVIGATION### start--->
+  <a class="inaktiv">Chat</a><a class="inaktiv">Musik</a><a>Einstellungen</a><a>Abbrechen</a><a id="moe_Kopf_toggle">Ausklappen</a>
+<!-- ###NAVIGATION### end--->
+</div>
+<div id="Spielmenue">
+  <a id="moe_bugreport" title="Fehler melden" style="display:none;"><img src="bilder/bug_report.png"  width="20" alt="Fehler melden"/></a>
+  <a class="inaktiv" id="moe_Chat" title="Chat an-/ausschalten"><img src="bilder/chat_disabled.png" width="20" alt="Chat"/></a>
+  <a class="inaktiv" id="moe_Musik" title="Musik an-/auschalten"><img src="bilder/musik_disabled.png" width="20" alt="Musik"/></a>
+  <a id="moe_Sound" title="Geräusche an-/auschalten"><img src="bilder/sound_1_enabled.png" width="20" alt="Sound"/></a>
+  <a id="gamesettings" title="Einstellungen &ouml;ffnen"><img src="bilder/einstellungen_enabled.png" width="20" alt="Einstellungen"/></a>
+  <a id="gamehelper" title="einen Spielzug vorschlagen"><img src="bilder/gamehelper.png" alt="Hilfe"/></a>
+  <a class="inaktiv" id="moe_Abbruch" title="Spiel abbrechen"><img src="bilder/spielabbruch_disabled.png"  width="20" alt="Abbrechen"/></a>
+  <a id="moe_Kopf_toggle"title="Seitenkopf aus-/einklappen"><img src="bilder/ausklappen.png"  width="20" alt="Ausklappen"/></a>
+</div>
+  
+<div id="kartenbilder">
+  <div class="front" id="zu"> </div>
+  <div class="front" id="eA"> </div>
+  <div class="front" id="eK"> </div>
+  <div class="front" id="eO"> </div>
+  <div class="front" id="eU"> </div>
+  <div class="front" id="et"> </div>
+  <div class="front" id="e9"> </div>
+  <div class="front" id="gA"> </div>
+  <div class="front" id="gK"> </div>
+  <div class="front" id="gO"> </div>
+  <div class="front" id="gU"> </div>
+  <div class="front" id="gt"> </div>
+  <div class="front" id="g9"> </div>
+  <div class="front" id="hA"> </div>
+  <div class="front" id="hK"> </div>
+  <div class="front" id="hO"> </div>
+  <div class="front" id="hU"> </div>
+  <div class="front" id="ht"> </div>
+  <div class="front" id="h9"> </div>
+  <div class="front" id="sA"> </div>
+  <div class="front" id="sK"> </div>
+  <div class="front" id="sO"> </div>
+  <div class="front" id="sU"> </div>
+  <div class="front" id="st"> </div>
+  <div class="front" id="s9"> </div>
+  <div class="front_quer" id="zu_quer"></div>
+</div>
+
+<div id="sound_samples">
+<audio id="drehen-1" src="sounds/drehen-01.ogg" preload="auto"></audio>
+<audio id="drehen-2" src="sounds/drehen-02.ogg" preload="auto"></audio>
+<audio id="drehen-3" src="sounds/drehen-03.ogg" preload="auto"></audio>
+
+<audio id="stapelablegen-1" src="sounds/stapelablegen-01.ogg" preload="auto"></audio>
+<audio id="stapelablegen-2" src="sounds/stapelablegen-02.ogg" preload="auto"></audio>
+<audio id="stapelablegen-3" src="sounds/stapelablegen-03.ogg" preload="auto"></audio>
+
+<audio id="heben-1" src="sounds/heben-01.ogg" preload="auto"></audio>
+<audio id="heben-2" src="sounds/heben-02.ogg" preload="auto"></audio>
+<audio id="heben-3" src="sounds/heben-03.ogg" preload="auto"></audio>
+<audio id="heben-4" src="sounds/heben-04.ogg" preload="auto"></audio>
+<audio id="heben-5" src="sounds/heben-05.ogg" preload="auto"></audio>
+
+<audio id="hinlegen-1" src="sounds/hinlegen-01.ogg" preload="auto"></audio>
+<audio id="hinlegen-2" src="sounds/hinlegen-02.ogg" preload="auto"></audio>
+<audio id="hinlegen-3" src="sounds/hinlegen-03.ogg" preload="auto"></audio>
+<audio id="hinlegen-4" src="sounds/hinlegen-04.ogg" preload="auto"></audio>
+<audio id="hinlegen-5" src="sounds/hinlegen-05.ogg" preload="auto"></audio>
+<audio id="hinlegen-6" src="sounds/hinlegen-06.ogg" preload="auto"></audio>
+<audio id="hinlegen-7" src="sounds/hinlegen-07.ogg" preload="auto"></audio>
+
+<audio id="stichnehmen-1" src="sounds/stichnehmen-01.ogg" preload="auto"></audio>
+<audio id="stichnehmen-2" src="sounds/stichnehmen-02.ogg" preload="auto"></audio>
+<audio id="stichnehmen-3" src="sounds/stichnehmen-03.ogg" preload="auto"></audio>
+<audio id="stichnehmen-4" src="sounds/stichnehmen-04.ogg" preload="auto"></audio>
+</div>
+  
+
+  <div id="protokoll"></div>
+  <div id="queue_protokoll">
+    <h3>mFX-Protokoll<input type="button" onclick="oMfxQueue.exec_first();" value="Weiter" /></h3>
+    <div id="mfx_protokoll"></div>
+    <h3>Offene Karten nach dem letzten Zug des Spieles</h3>
+    <div id="offene_karten_nach_letztem_zug"></div>
+    <h3>Protokoll des Spieles</h3>
+    <form id="protokoll_download" method="POST" target="_blank" action="http://download.moellerspiel.de/protocol/index.php">
+  <textarea id="zugprotokoll" name="zugprotokoll" rows="2" cols="30" onclick="this.select()"></textarea>
+    <input type="hidden" id="protokoll_download_key" name="key" value="2cef2b4258103798903c575a04c421a5" />
+    </form>
+    
+  </div>
+  
+<div id="spielfeld_container">
+<div id="ratio_keeper"></div>
+<div id="spielfeld">
+  
+  <div id="spielform" class="gruenfeld">Einzelspiel 0.3.6&alpha;</div>
+  
+  <div id="gegnerlinksframe">
+    <div id="gegnerlinks">
+      <div id="gl_1"><div id="gl_1z"></div><div id="gl_1a"></div></div>
+      <div id="gl_2"><div id="gl_2z"></div><div id="gl_2a"></div></div>
+      <div id="gl_3"><div id="gl_3z"></div><div id="gl_3a"></div></div>
+    </div>
+    <div id="gegnerlinks_ueberschrift" >
+      <p style="margin:0;" class="userbox_bild"><img src="bilder/spacer.png"></p>
+      <p style="margin-top:-2pt;" class="userbox_name">Name</p>
+    </div>
+    <div id="gegnerlinks_arrays">Gegner Links</div>
+  </div>
+
+  <div id="gegnerrechtsframe">
+    <div id="gegnerrechts">
+      <div id="gr_1"><div id="gr_1z"></div><div id="gr_1a"></div></div>
+      <div id="gr_2"><div id="gr_2z"></div><div id="gr_2a"></div></div>
+      <div id="gr_3"><div id="gr_3z"></div><div id="gr_3a"></div></div>
+    </div>
+    <div id="gegnerrechts_ueberschrift" >
+      <p style="margin:0;" class="userbox_bild"><img src="bilder/spacer.png"></p>
+      <p style="margin-top:-2pt;" class="userbox_name">Name</p>
+    </div>
+    <div id="gegnerrechts_arrays">Gegner Rechts</div>
+  </div>
+  
+  <div id="spielerframe">
+    <div id="spieler">
+      <div id="sp_1"><div id="sp_1z"></div><div id="sp_1a"></div></div>
+      <div id="sp_2"><div id="sp_2z"></div><div id="sp_2a"></div></div>
+      <div id="sp_3"><div id="sp_3z"></div><div id="sp_3a"></div></div>
+    </div>
+    <div id="spieler_ueberschrift" >
+      <p style="margin:0;" class="userbox_bild"><img src="bilder/spacer.png"></p>
+      <p style="margin-top:-2pt;" class="userbox_name">Name</p>
+    </div>
+    <div id="spieler_arrays">Spieler</div>
+  </div>
+  
+  <div id="stichstapel_spieler"></div>
+  <div id="stichstapel_gegnerlinks"></div>
+  <div id="stichstapel_gegnerrechts"></div>
+  
+  <div id="mittelfeld">
+  
+    <div id="moellerstapelframe">
+      <div id="moellerstapel">
+        <div id="moeller"></div>
+        <div id="ziehstapel"></div>
+      </div>
+      <div id="moellerstapel_arrays">M&oslash;ller</div>
+    </div>
+
+    <div id="bankframe">
+      <div id="bank_arrays">Bank</div>
+      <div id="bank">
+      <div id="StapelTausch" class="spieler_aktiv gruenfeld"><!--<img src="bilder/cursor/pfeil2_2.png" />--></div>
+        <div id="ba_3z"></div>
+        <div id="ba_3a"></div>
+        <div id="ba_1z"></div>
+        <div id="ba_1a"></div>
+        <div id="ba_2z"></div>
+        <div id="ba_2a"></div>
+        <div id="ba_1n"></div>
+        <div id="ba_2n"></div>
+        <div id="ba_3n"></div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="letzter_stichframe">
+    <div id="letzter_stich_ueberschrift">Letzter Stich</div>
+    <div id="letzter_stich"></div>
+  </div>
+    
+  <!--<div class="iconbutton" id="gamesettings"><img src="bilder/settings.png" alt="Hilfe" /></div>-->
+  <div class="optionlayer" id="settings">
+    <!--<div class="iconbutton" id="helpersettings_close"><img src="bilder/close.png" alt="Hilfe" /></div>-->
+    <div class="iconbutton" id="settings_close"><img src="bilder/close.png" alt="Hilfe" /></div>
+    <!--<p style="font-size:8pt">Diese Einstellungen gelten nur für das aktuelle Spiel. Wenn sie eine Eigenschaft für weitere Spiele verändern wollen, nehmen Sie dies in den globalen Einstellungen vor.</p>-->
+  <p><a class="moe_button" href="/17" target="_blank">Einstellungen dauerhaft ändern</a></p>
+    <h3>Geschwindigkeit</h3>
+    <table width="100%" style="position:relative;">
+      <tr id="option_gamespeed"><td>Spielgeschwindigkeit<br /><span style="font-size:8pt">(1-Sehr Langsam, 5-Sehr schnell)</span></td><td width="25%">
+        <div id="gameSpeed"></div>
+    <h4 style="position:absolute;top:-5px;right:28%" id="gamespeed_value"></h4>
+      </td></tr>
+      <!--<tr id="option_sound"><td>Spielsound<br /><span style="font-size:8pt">Schaltet die Spielsounds an und aus.</span></td><td width="25%">
+          <div id="playSound">
+            <input type="radio" id="playSoundOff" name="playSound" value="false"/><label for="playSoundOff">Aus</label>
+            <input type="radio" id="playSoundOn" name="playSound" checked="checked" value="true" /><label for="playSoundOn">An</label>
+          </div>
+        </td></tr>-->
+    </table>
+    <h3>Hilfen</h3>
+    <table width="100%">
+      <tr id="option_points"><td>Punkte auf der Mølle<br /><span style="font-size:8pt">Maus über dem Stapel zeigt dessen Punkte an.</span></td><td width="25%">
+          <div id="showPoints">
+            <input type="radio" id="showPointsOff" name="showPoints" value="false"/><label for="showPointsOff">Aus</label>
+            <input type="radio" id="showPointsOn" name="showPoints" checked="checked" value="true" /><label for="showPointsOn">An</label>
+          </div>
+        </td></tr>
+      <!--<tr><td>Trumpfkarten anzeigen</td><td>
+          <div id="showTrump">
+            <input type="radio" id="showTrumpOff" name="showTrump" value="0"/><label for="showTrumpOff">Aus</label>
+            <input type="radio" id="showTrumpOn" name="showTrump" checked="checked" value="1"/><label for="showTrumpOn">An</label>
+          </div>
+        </td></tr>-->
+      <tr id="option_allowdturns"><td>Erlaubte Züge anzeigen<br /><span style="font-size:8pt">Erlaubte Karten werden gelb umrandet.</span></td><td>
+          <div id="analizeTurn">
+            <input type="radio" id="analizeTurnOff" name="analizeTurn" value="false"/><label for="analizeTurnOff">Aus</label>
+            <input type="radio" id="analizeTurnOn" name="analizeTurn" checked="checked" value="true"/><label for="analizeTurnOn">An</label>
+          </div>
+        </td></tr>
+      <tr id="option_advice"><td>Einen Zug empfehlen<br /><span style="font-size:8pt">Klick auf die Glühbirne zeigt einen Zug an.</span></td><td>
+          <div id="giveAdvice">
+            <input type="radio" id="giveAdviceOff" name="giveAdvice" value="false"/><label for="giveAdviceOff">Aus</label>
+            <input type="radio" id="giveAdviceOn" name="giveAdvice"  checked="checked" value="true"/><label for="giveAdviceOn">An</label>
+          </div>
+        </td></tr>
+      <tr id="option_showFlute"><td>Vindmøllestapel umdrehen<br /><span style="font-size:8pt">Anzeigen, wenn man Flœte oder Plætte hat.</span></td><td>
+          <div id="showFlute">
+            <input type="radio" id="showFluteOff" name="showFlute" value="false"/><label for="showFluteOff">Aus</label>
+            <input type="radio" id="showFluteOn" name="showFlute"  checked="checked" value="true"/><label for="showFluteOn">An</label>
+          </div>
+        </td></tr>
+    </table>
+  </div>
+  
+   <div class="optionlayer" id="bugreport">
+    <!--<div class="iconbutton" id="helpersettings_close"><img src="bilder/close.png" alt="Hilfe" /></div>-->
+    <!--<p style="font-size:8pt">Diese Einstellungen gelten nur für das aktuelle Spiel. Wenn sie eine Eigenschaft für weitere Spiele verändern wollen, nehmen Sie dies in den globalen Einstellungen vor.</p>-->
+  <h2>Fehler melden</h2>
+  <form id="bugreport_form" name="bugreport_form">
+    <div id="bugreport_response">&nbsp;</div>
+    <label for="bugreport_title" style="float:left;">Titel:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="text" id="bugreport_title" name="bugreport_title"><br />
+    <label for="bugreport_errorDescription" style="float:left;">Beschreibung (Bitte kurz, aber genau.)</label><br /><textarea rows="6" cols="50" id="bugreport_errorDescription" name="bugreport_errorDescription"></textarea>
+    <input type="submit" id="bugreport_submit" value="Fehler melden!">
+  </form>
+  <div style="margin-top:10px;"><input type="button" id="bugreport_download_protocol" value="Spiel herunterladen"></input></div>
+  </div>
+  
+  <!-- ###TUTORIAL### start-->
+  
+  <!-- ###TUTORIAL### ende-->
+</div>
+
+  <div id="Tutorialnavigation">
+  ###BOTTOMBAR###
+  </div>
+<div id="Footer">~ <a href="index.php?id=11">AGB</a> ~ <a href="index.php?id=12">Impressum</a> ~ moellerspiel.de © 2013 ~</div>
+</div>
+  
+  
+  <div id="dialog" title="M&oslash;ller"><p>Das ist ein Textdialog.</p></div>
+
+<div id="ergebnisfeld">
+<!-- ###DATEN### start--->
+Hier kommt das Ergebnis formular rein, dass dan ausgespuckt wird
+
+
+<script type="text/JavaScript">
+
+$(document).ready(function(){
+
+
+//try{
+
+  var div = $("#spielfeld");
+  var div1 = $("#ba_1a");
+  var div2 = $("#ba_2a");
+  var div3 = $("#ba_3a");
+   
+  function showIt() {
+    var n = div.queue("fx");
+    var m1 = div1.queue("fx");
+    var m2 = div2.queue("fx");
+    var m3 = div3.queue("fx");
+    $("#mfx_protokoll").text( "Spielfeld:"+ n.length + " Bank: (" + m1.length + "," + m2.length + "," + m3.length + ")" );
+    setTimeout(showIt, 100);
+  }
+  
+  /*ui_bind_start_events();*/
+  showIt();
+
+
+  aDieMitspieler = new Array(new Array(1255412563,"Ralf","rechts"),new Array(14577841,"Caro","mitte"),new Array(748874568412658,"Kim","links"));
+  strg_spielbeginn(init_SpielID,init_oBlatt,aDieMitspieler,MOE_SPIELTYP_Ramsch,"Einzelspiel");
+  
+  $("#spielfeld").delay(1500);
+  
+
+  
+
+/*}
+catch(e){
+
+  if(typeof(e)=="number"){
+    protokoll(Nachrichten.titel(e));
+    protokoll(Nachrichten.text(e));
+  } else {
+    protokoll("Fehler");
+    protokoll(printStackTrace(e).join("<br />"));
+  }
+}*/
+
+});
+
+</script> 
+<!-- ###DATEN### ende--->
+</div>
+
+<!-- ###DOKUMENT### ende---> 
+  
+</body>
+</html>

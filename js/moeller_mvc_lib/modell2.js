@@ -250,7 +250,7 @@ function zobj(argSpielernummer,argSpielerstapel,argBankstapel,argSpielerkarte,ar
 
 /*****************************************************************
 
-	Objekte
+	ObjekteS
 
 *****************************************************************/
 
