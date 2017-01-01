@@ -45,6 +45,7 @@ spielfeldobject = function(argMitspieler,argSpielfeldOptionen,argSpieltyp){
 	var oKartenLegeSteuerung = strg_ziehen;
 	var oBankDrehenSteuerung = strg_bank_umdrehen;
 	var oDialogTimer;
+	var iZugart=0;
 
 	if(typeof(argSpieltyp)=="undefined"){
 		var iSpieltyp = MOE_SPIELTYP_Ramsch;
@@ -316,6 +317,7 @@ spielfeldobject = function(argMitspieler,argSpielfeldOptionen,argSpieltyp){
 								//Hier muss der Controler aufgerufen werden
 								//strg_ziehen(MOE_ZUGART_KarteUndStapelAngeklickt,biAktuellerSpieler,iAktivierterSpielerstapel,iStapelID);
 								oKartenLegeSteuerung.apply(document, new Array(MOE_ZUGART_KarteUndStapelAngeklickt,biAktuellerSpieler,iAktivierterSpielerstapel,iStapelID));
+								selbst_Spielfeld.set_zugart(MOE_ZUGART_KarteUndStapelAngeklickt);
 								
 								selbst_Bank.leere_bank_demarkieren();
 							}
@@ -859,6 +861,7 @@ spielfeldobject = function(argMitspieler,argSpielfeldOptionen,argSpieltyp){
 								//protokoll("Spieler "+biAktuellerSpieler+" von "+iAktivierterSpielerstapel+" nach "+(iStapelID)+" ziehen, hä?");
 								//strg_ziehen(MOE_ZUGART_VonStapelZuStapelGezogen,biAktuellerSpieler,iAktivierterSpielerstapel,oBank.get_abgelegten_stapel());
 								oKartenLegeSteuerung.apply(document, new Array(MOE_ZUGART_VonStapelZuStapelGezogen,biAktuellerSpieler,iAktivierterSpielerstapel,oBank.get_abgelegten_stapel()));
+                            selbst_Spielfeld.set_zugart(MOE_ZUGART_VonStapelZuStapelGezogen);
 								oBank.leere_bank_demarkieren();
 							//Die Zeile dient nur dem Test
 							//selbst_Spielfeld.karte_auflegen(iSpielernummer,diStapelnummer,oBank.get_abgelegten_stapel());
@@ -2809,7 +2812,7 @@ spielfeldobject = function(argMitspieler,argSpielfeldOptionen,argSpieltyp){
 		selbst_Spielfeld.set_offene_karten(oZug.get_offene_karten());
 		
 		//Das Zugprotokoll in HTML-Tags schreiben
-		//$("#offene_karten_nach_letztem_zug").text(aZugProtokoll[aZugProtokoll.length-1].get_offene_karten().join("/"));
+		$("#offene_karten_nach_letztem_zug").text(aZugProtokoll[aZugProtokoll.length-1].get_offene_karten().join("/"));
 		$("#zugprotokoll").text(JSON.stringify(aZugProtokoll));
 		
 		$(this).dequeue();
@@ -2836,10 +2839,24 @@ spielfeldobject = function(argMitspieler,argSpielfeldOptionen,argSpieltyp){
 		sSpielform=argSpielform;
 		$('#spielform').text(sSpielform+" "+selbst_Spielfeld.get_spieltyp()+" "+MOE_VERSION+MOE_DEVSTATUS);
 	}
-	
-	
-	
-	/*************************
+
+
+    /*************************
+
+     	die Spielzugart speichern und lesen
+
+     *************************/
+
+	this.get_zugart = function(){
+		return iZugart;
+	}
+
+
+	function set_zugart(argZugart){
+		iZugart = argZugart;
+	}
+
+    /*************************
 	 * 
 	 * Zeige Zugempehlung für den aktuellen Spieler an
 	 * 
