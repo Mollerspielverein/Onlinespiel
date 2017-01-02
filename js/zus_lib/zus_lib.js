@@ -75,7 +75,7 @@
 	function ma_rand(a,e)
 	{
 		var diErgebnis=a+Math.random()*(e-a);
-		protokoll("ma_rand: "+diErgebnis+" aus  ["+a+","+e+"]");
+		console.log("ma_rand: "+diErgebnis+" aus  ["+a+","+e+"]");
 		return diErgebnis;
 	}
 	
@@ -118,7 +118,7 @@
 				var c=0;
 				var iLength=a.length;
 				for(var i=0;i<iLength;i++)c=c+a[i]*b[i];
-				protokoll("ma_dotp( "+a+" , "+b+" ): "+c);
+				console.log("ma_dotp( "+a+" , "+b+" ): "+c);
 				return c;
 			}
 			else throw "Fehler: Beide Argumente müssen die gleiche Anzahl numerischer Elemente haben.";
