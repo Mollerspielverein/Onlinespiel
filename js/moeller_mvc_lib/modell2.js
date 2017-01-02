@@ -97,7 +97,7 @@ bobj = function(argFarben,argBilder,argStaerke,argAugenzahlen,argMultiplikator)
 		var diIstMoeller=0;
 		if(argName==sMoeller)diIstMoeller=1;
 		return new kobj(argName);
-	}
+	};
 	
 	function get_farbe(argName){
 		return argName[0];
@@ -109,11 +109,11 @@ bobj = function(argFarben,argBilder,argStaerke,argAugenzahlen,argMultiplikator)
 	
 	this.get_staerke = function(argName){
 		return aStaerke[get_bild(argName)];
-	}
+	};
 	
 	this.get_augenzahl = function(argName){
 		return aWertigkeit[get_bild(argName)];
-	}
+	};
 	//
 	
 	function create_alle_karten()
@@ -132,7 +132,7 @@ bobj = function(argFarben,argBilder,argStaerke,argAugenzahlen,argMultiplikator)
 	{
 		if(aAlleKarten.length==0)create_alle_karten();
 		return aAlleKarten;
-	}
+	};
 
 	this.get_alle_farben = function(){
 		var daFarben = new Array();
@@ -141,7 +141,7 @@ bobj = function(argFarben,argBilder,argStaerke,argAugenzahlen,argMultiplikator)
 
 	this.get_moeller_staerke = function(){
 		return aStaerke["M"];
-	}
+	};
 }
 
 /********************************************
@@ -189,70 +189,70 @@ function zobj(argSpielernummer,argSpielerstapel,argBankstapel,argSpielerkarte,ar
 	this.set_spieler_nimmt_stich = function(argStich){
 		this.bMussNehmen=true;
 		this.aGezogenerStich=argStich.get_stapel();
-	}
+	};
 	
 	this.set_spieler_zieht_nach = function(argStapel){
 		if(this.bSpielerstapelGedreht===false){									//Nur wenn ein Spieler nicht den eigenen Stapel gedreht hat, darf nachgezogen werden
 			this.bSpielerHatNachgezogen=true;
 			this.aNachgezogenerKartenstapel=argStapel.get_stapel();
 		} else throw 1001;
-	}
+	};
 	
 	this.set_spieler_dreht_um = function(argKartenname){
 		if(this.bSpielerHatNachgezogen===false){								//Nur wenn ein Spieler nicht nachgezogen hat, darf er den Stapel drehen!
 			this.bSpielerstapelGedreht=true;
 			this.sUmgedrehteKarte = argKartenname;
 		} else throw 1002;
-	}
+	};
 	
 	this.set_bank_zieht_nach = function(argStapel){
 		if(this.bBankstapelGedreht===false){
 			this.bBankHatNachgezogen=true;
 			this.aNachgezogenerBankstapel=argStapel.get_stapel();
 		}
-	}
+	};
 	
 	this.set_bank_dreht_um = function(argStapel){
 		if(this.bBankHatNachgezogen===false){								//Nur wenn ein Spieler nicht nachgezogen hat, darf er den Stapel drehen!
 			this.bBankstapelGedreht=true;
 			this.aUmgedrehterStapel = argStapel;
 		} else throw 1002;
-	}		
+	}		;
 
 	this.get_genommenen_stich = function(){
 		if(this.aGezogenerStich.length>0)return new stobj(this.aGezogenerStich);
 		else return false;
-	}
+	};
 	
 	this.get_nachgezogenen_kartenstapel = function(){
 		if(this.aNachgezogenerKartenstapel.length>0)return new kstobj(this.aNachgezogenerKartenstapel[0],this.aNachgezogenerKartenstapel[1]);
 		else return false;
-	}
+	};
 	
 	this.get_umgedrehte_karte = function(){
 		if(this.sUmgedrehteKarte!="") return new kobj(this.sUmgedrehteKarte);
 		else return false;
-	}
+	};
 	
 	this.get_nachgezogenen_bankstapel = function(){
 		if(this.aNachgezogenerBankstapel.length>0)return new bstobj(new stobj(this.aNachgezogenerBankstapel[0]),new stobj(this.aNachgezogenerBankstapel[1]));
 		else return false;
-	}
+	};
 
 	this.get_umgedrehten_stapel = function(){
 		if(this.aUmgedrehterStapel.length>0)return new stobj(this.aUmgedrehterStapel);
 		else return false;			
-	}
+	};
 
 	this.set_offene_karten = function(argOffeneKarten){
 		if(typeof(this.aOffeneKarten)=="undefined"){
 			this.aOffeneKarten=argOffeneKarten;
 		}
-	}
+	};
 	
 	this.get_offene_karten = function(){
 		return this.aOffeneKarten;
-	}
+	};
 }
 
 /*****************************************************************
@@ -1199,17 +1199,18 @@ spielobject = function(arg_SpielID,arg_oBlatt,argAlleSpieler)
 		oNeuerZug.bDarfStapelDrehen=aAlleSpieler[iAktuellerSpieler].darf_stapel_drehen();
 
 		//nächsten Spieler festlegen und laden
-		selbst.naechster_spieler();
-
 		//welcher Spieler ist der nächste, gibt es einen nächsten Spieler
-		oNeuerZug.iNaechsterSpielernummer=iAktuellerSpieler;
+		oNeuerZug.iNaechsterSpielernummer = selbst.naechster_spieler();
 
-		//Type des nächsten Spielers
-		oNeuerZug.sNaechsterSpielertyp=aAlleSpieler[iAktuellerSpieler].get_spielertyp();
+		if(oNeuerZug.iNaechsterSpielernummer!==false) {
 
-		//Nächster Spieler darf drehen?
-        oNeuerZug.bNaechsterSpielerDarfDrehen=aAlleSpieler[iAktuellerSpieler].darf_stapel_drehen();
 
+            //Type des nächsten Spielers
+            oNeuerZug.sNaechsterSpielertyp = aAlleSpieler[iAktuellerSpieler].get_spielertyp();
+
+            //Nächster Spieler darf drehen?
+            oNeuerZug.bNaechsterSpielerDarfDrehen = aAlleSpieler[iAktuellerSpieler].darf_stapel_drehen();
+        }
 		return oNeuerZug;
 	}
 
@@ -1238,7 +1239,7 @@ spielobject = function(arg_SpielID,arg_oBlatt,argAlleSpieler)
 			iNeuerSpieler++;
 			if(iNeuerSpieler==aAlleSpieler.length){iNeuerSpieler=0;}
 
-			//protokoll("Vorschlag nächster Spieler "+iNeuerSpieler);
+			console.log("Vorschlag nächster Spieler "+iNeuerSpieler);
 
 			//Wenn der Spielerstapel nicht leer ist, darf erspielen!
 			if(! aAlleSpieler[iNeuerSpieler].kartenstapel(0).ist_leer() || ! aAlleSpieler[iNeuerSpieler].kartenstapel(1).ist_leer() || ! aAlleSpieler[iNeuerSpieler].kartenstapel(2).ist_leer())
@@ -1248,6 +1249,8 @@ spielobject = function(arg_SpielID,arg_oBlatt,argAlleSpieler)
 		}
 		while(iNeuerSpieler!=iAktuellerSpieler)
 
+		//Nach dem letzten Zug beendet sich das Spiel und es können keine Weiteren züge gemacht werden!
+		selbst.spiel_ist_zuende();
 		return false;
 	}
 
@@ -1266,12 +1269,17 @@ spielobject = function(arg_SpielID,arg_oBlatt,argAlleSpieler)
 				var bFuerDenAktuellenSpieler=true;
 				oNeuerZug.set_offene_karten(selbst.get_offene_karten(bFuerDenAktuellenSpieler));
 
+                //Darf der Spieler auf der Vindmoelle drehen
+                oNeuerZug.bDarfStapelDrehen=aAlleSpieler[iAktuellerSpieler].darf_stapel_drehen();
+
 				return oNeuerZug;
 			}
 			else{
 				//protokoll(iAktuellerSpieler+" durfte nicht mehr die Bank drehen!");
-				return 2003;
+				return 3002;
 			}
+		} else {
+			return 3001;
 		}
 	}
 
