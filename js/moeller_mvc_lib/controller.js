@@ -134,7 +134,7 @@ function strg_ziehen_client(oZug){
 
 	/* Prüfung, ob der Zug ungültig war */
 	//noinspection JSUnresolvedVariable
-    if(oZug.errornr===0){
+    if(oZug.errornr!=0){
 
 		//Zug in im View rückgängig machen
 		Spielfeld.zug_zurueckziehen(oZug.iSpielernummer,oZug.iSpielerstapel);
@@ -197,7 +197,7 @@ function strg_ziehen_client(oZug){
 	} else {
 		if(oZug.bBankstapelGedreht){
 			//Hier mus snoch eine Änderung rein
-			console.log("strg_ziehen: umgedrehter Stapel:"+oZug.get_umgedrehten_stapel().get_stapel());
+			console.log("strg_ziehen: umgedrehter Stapel:"+oZug.aUmgedrehterStapel);
 			Spielfeld.bank_dreht_um(argBankstapel,oZug.aUmgedrehterStapel);
 			//Spielfeld.bank_dreht_um(argBankstapel,oZug.get_umgedrehten_stapel().get_stapel());
 		}

@@ -317,7 +317,7 @@ spielfeldobject = function(argMitspieler,argSpielfeldOptionen,argSpieltyp){
 								//Hier muss der Controler aufgerufen werden
 								//strg_ziehen(MOE_ZUGART_KarteUndStapelAngeklickt,biAktuellerSpieler,iAktivierterSpielerstapel,iStapelID);
 								oKartenLegeSteuerung.apply(document, new Array(MOE_ZUGART_KarteUndStapelAngeklickt,biAktuellerSpieler,iAktivierterSpielerstapel,iStapelID));
-								selbst_Spielfeld.set_zugart(MOE_ZUGART_KarteUndStapelAngeklickt);
+								set_zugart(MOE_ZUGART_KarteUndStapelAngeklickt);
 								
 								selbst_Bank.leere_bank_demarkieren();
 							}
@@ -605,7 +605,7 @@ spielfeldobject = function(argMitspieler,argSpielfeldOptionen,argSpieltyp){
 				//Spielerstapel aktivieren
 				if(rSpielerstapel[0][di].children().length==1)
 				{
-					rSpielerstapel[0][di].draggable("enable");
+					//rSpielerstapel[0][di].draggable("enable");
 
 					//Spielerstapel einfärben, wenn die Anzeige aktiviert ist
 					if(oSpielfeldOptionen.analizeTurn==true){
@@ -861,7 +861,7 @@ spielfeldobject = function(argMitspieler,argSpielfeldOptionen,argSpieltyp){
 								//protokoll("Spieler "+biAktuellerSpieler+" von "+iAktivierterSpielerstapel+" nach "+(iStapelID)+" ziehen, hä?");
 								//strg_ziehen(MOE_ZUGART_VonStapelZuStapelGezogen,biAktuellerSpieler,iAktivierterSpielerstapel,oBank.get_abgelegten_stapel());
 								oKartenLegeSteuerung.apply(document, new Array(MOE_ZUGART_VonStapelZuStapelGezogen,biAktuellerSpieler,iAktivierterSpielerstapel,oBank.get_abgelegten_stapel()));
-                            selbst_Spielfeld.set_zugart(MOE_ZUGART_VonStapelZuStapelGezogen);
+                            	set_zugart(MOE_ZUGART_VonStapelZuStapelGezogen);
 								oBank.leere_bank_demarkieren();
 							//Die Zeile dient nur dem Test
 							//selbst_Spielfeld.karte_auflegen(iSpielernummer,diStapelnummer,oBank.get_abgelegten_stapel());
@@ -2809,10 +2809,10 @@ spielfeldobject = function(argMitspieler,argSpielfeldOptionen,argSpieltyp){
 		aZugProtokoll.push(oZug);
 		
 		//Offene Karten ergänzen
-		selbst_Spielfeld.set_offene_karten(oZug.get_offene_karten());
+		selbst_Spielfeld.set_offene_karten(oZug.aOffeneKarten);
 		
 		//Das Zugprotokoll in HTML-Tags schreiben
-		$("#offene_karten_nach_letztem_zug").text(aZugProtokoll[aZugProtokoll.length-1].get_offene_karten().join("/"));
+		$("#offene_karten_nach_letztem_zug").text(oZug.aOffeneKarten.join("/"));
 		$("#zugprotokoll").text(JSON.stringify(aZugProtokoll));
 		
 		$(this).dequeue();
