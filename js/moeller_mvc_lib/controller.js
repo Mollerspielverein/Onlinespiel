@@ -34,14 +34,22 @@ function sendPostToGameServerHelfer(sCommand,sMessage){
 
     $.post("http://10.0.18.19:3000", JSON.stringify({ctrl:sCommand,msg:sMessage}),function (data) {
     	//alert(data)
-		if(sCommand == "init_game"){
-            strg_spielbeginn_client(JSON.parse(data));
-		} else {
-			if(sCommand == "make_turn"){
+
+        switch(sCommand){
+            case "init_game":
+                strg_spielbeginn_client(JSON.parse(data));
+                break;
+            case "make_turn":
                 strg_ziehen_client(JSON.parse(data));
-			} else {
+                break;
+            case "turn_stack":
+                strg_bank_umdrehen_client(JSON.parse(data));
+                break;
+            case "get_results":
+                strg_spielende_client(JSON.parse(data));
+                break;
+            default:
                 alert("Kann die verlange Aktion ("+sCommand+") nicht ausführen!");
-			}
 		}
 
     }).fail(function () {
@@ -130,6 +138,7 @@ function strg_ziehen(argZugart,argSpielernummer,argSpielerstapel,argBankstapel) 
  * @param oZug integer, zugobject
  * @returns {*}
  */
+
 function strg_ziehen_client(oZug){
 
 	/* Prüfung, ob der Zug ungültig war */
@@ -209,7 +218,10 @@ function strg_ziehen_client(oZug){
 	//nächsten spieler wählen und dessen id laden
 	var biNaechsterSpieler = oZug.iNaechsterSpielernummer;
 
+	console.log("Gibt es einen nächsten Spieler?");
+
 	if( typeof(biNaechsterSpieler)=="number" /* Wenn es überhaupt einen nächsten Spieler gibt */){
+        console.log("Nächster Spieler ist "+biNaechsterSpieler);
 
 		//nächsten spieler anzeigen
 		Spielfeld.aktuellen_spieler_anzeigen(biNaechsterSpieler);
@@ -233,6 +245,7 @@ function strg_ziehen_client(oZug){
 		}
 
 	} else {
+        console.log("Das Spielende wird eingeleitet.");
 		// Ende Controller aktivieren
 		strg_spielende();
 	}
@@ -245,30 +258,21 @@ function strg_ziehen_client(oZug){
 
 *********************************/	
 
-function strg_bank_umdrehen(argBankstapelnummer, iSpielernummer){
-	if(0 < argBankstapelnummer && argBankstapelnummer >= 3){
-		Spielfeld.dialog(Nachrichten.text(3001),Nachrichten.titel(3001)+"("+3001+")");
-		return void 1;
-	}
-	if(!Spiel.spieler(iSpielernummer).darf_stapel_drehen()){
-		Spielfeld.dialog(Nachrichten.text(3002),Nachrichten.titel(3002)+"("+3002+")");
-		return void 1;
-	}
-	if(!Spiel.get_aktuellen_spieler()==iSpielernummer){
-		Spielfeld.dialog(Nachrichten.text(3003),Nachrichten.titel(3003)+"("+3003+")");
-		return void 1;
-	}
-	
-	// bank drehen von Modell machen lassen und die Karten, die nun offen liegen laden
-	oiDrehZug = Spiel.bankstapel_drehen(argBankstapelnummer);
+function strg_bank_umdrehen(argBankstapelnummer, iSpielernummer) {
+    // bank drehen von Modell machen lassen und die Karten, die nun offen liegen laden
+    //oiDrehZug = Spiel.bankstapel_drehen(argBankstapelnummer);
+    sendPostToGameServerHelfer("turn_stack",JSON.stringify({vindmillStack:argBankstapelnummer,playerId:iSpielernummer}));
+}
+
+function strg_bank_umdrehen_client(oiDrehZug){
 	
 	if(typeof(oiDrehZug)!="number"){
 		// bank drehen im view darstellen mit den neuen offenliegenden Karten
-		Spielfeld.bank_drehen(argBankstapelnummer,oiDrehZug.get_umgedrehten_stapel().get_stapel());
+		Spielfeld.bank_drehen(oiDrehZug.iBankstapel,oiDrehZug.aUmgedrehterStapel);
 		
 		//Wenn er drehen durfte, muss es nun wieder deaktiviert werden!!!
 		//Dies sollte eigentlich automatisch auch deaktiviert werden im Modell zum Test wird es ausgegeben
-		if(Spiel.spieler(Spiel.get_aktuellen_spieler()).darf_stapel_drehen()){
+		if(oiDrehZug.bDarfStapelDrehen){
 			console.log("strg_bank_umdrehen: Hier läuft etwas falsch!!! Spieler darf nicht mehr drehen, weil er es gerade gemacht hat und so sieht es aber aus: Spiel.spieler(Spiel.get_aktuellen_spieler()).darf_stapel_drehen():"+Spiel.spieler(Spiel.get_aktuellen_spieler()).darf_stapel_drehen());
 		} else {
 			Spielfeld.bank_drehen_deaktivieren();
@@ -404,62 +408,75 @@ function strg_spielbeginn_client(initGameData){
 
 *********************************/
 
-function strg_spielende(){
-	
-	// Alle Eingabemöglichkeiten deaktivieren
-	Spielfeld.spielfeld_sperren();
-	
-	//Anzeige des letzten Stiches deaktivieren und ausblenden
-	Spielfeld.letzterstich_deaktiveren();
-	
-	//Spielstatus auf Ende setzen
-	Spiel.spiel_ist_zuende();
-	
-    //Ergebis ausgeben
-	Spielfeld.spiel_ist_zuende(Spiel.get_spieler_punkte());
+function strg_spielende() {
 
-	/*var iBestePunkte=aPunktestand[0];
-	var biGewinnerNummer=0;
-	var biGleichstandGewinner=false;*/
-	
-	//Sieger ermitteln
-	/*for(var i=1;i<aPunktestand.length;i++)
-	{
-		if(aPunktestand[i]<iBestePunkte)
-		{
-			iBestePunkte=aPunktestand[i];
-			biGewinnerNummer=i;
-			biGleichstandGewinner=false;
-		} else if(aPunktestand[i]==iBestePunkte){
-			biGleichstandGewinner=i;
-		}
-	}*/
-	
+    sendPostToGameServerHelfer("get_results",JSON.stringify({}));
+}
 
-	
-	//Punktestand angeben
-	/*var sPunktestand = "";
-	for(var i=0;i<aPunktestand.length;i++)
-	{
-		if(i===biGewinnerNummer || i===biGleichstandGewinner)sPunktestand=sPunktestand+"<p>"+aMitspieler[i][1]+"(Sieg):"+aPunktestand[i]+"</p>";
-		else sPunktestand=sPunktestand+"<p>"+aMitspieler[i][1]+":"+aPunktestand[i]+"</p>";
-	}*/
-	
+function strg_spielende_client(oErgebnisse){
 
-	//sieger_anzeigen(sPunktestand,biGewinnerNummer,biGleichstandGewinner,aPunktestand);
-	
-	//Stichkarten aufdecken für jeden spieler einzeln
-	/*for(var i=0;i<Spiel.get_spieler_anzahl();i++){
-		
-		//Ablagestapelkarten laden
-		var aAblagestapel = Spiel.spieler(i).ablagestapel().get_stapel();
-		console.log("strg_spielende: Spieler "+i+" Ablagestapel:"+aAblagestapel )
-		
-		//Karten verschieben
-		Spielfeld.karte_vom_ablagestapel_aufdecken(i,aAblagestapel);
+    if(typeof(oErgebnisse)!=="number"){
 
-	}*/
-	
+        var aPunktestand= oErgebnisse.allePunkte; //Spiel.get_spieler_punkte()
+        var aAblagestapel=oErgebnisse.alleAblagestapel; // Spiel.spieler(i).ablagestapel().get_stapel();
+
+
+        // Alle Eingabemöglichkeiten deaktivieren
+        Spielfeld.spielfeld_sperren();
+
+        //Anzeige des letzten Stiches deaktivieren und ausblenden
+        Spielfeld.letzterstich_deaktiveren();
+
+        //Spielstatus auf Ende setzen
+        //Spiel.spiel_ist_zuende();  wird nun im Modell erledigt
+
+        //Ergebis ausgeben
+        Spielfeld.spiel_ist_zuende(aPunktestand);
+
+        var iBestePunkte=aPunktestand[0];
+        var biGewinnerNummer=0;
+        var biGleichstandGewinner=false;
+
+        //Sieger ermitteln
+        for(var i=1;i<aPunktestand.length;i++)
+        {
+            if(aPunktestand[i]<iBestePunkte)
+            {
+                iBestePunkte=aPunktestand[i];
+                biGewinnerNummer=i;
+                biGleichstandGewinner=false;
+            } else if(aPunktestand[i]==iBestePunkte){
+                biGleichstandGewinner=i;
+            }
+        }
+
+
+
+        //Punktestand angeben
+        var sPunktestand = "";
+        for(var i=0;i<aPunktestand.length;i++)
+        {
+            if(i===biGewinnerNummer || i===biGleichstandGewinner)sPunktestand=sPunktestand+"<p>"+aMitspieler[i][1]+"(Sieg):"+aPunktestand[i]+"</p>";
+            else sPunktestand=sPunktestand+"<p>"+aMitspieler[i][1]+":"+aPunktestand[i]+"</p>";
+        }
+
+
+        Spielfeld.sieger_anzeigen(sPunktestand,biGewinnerNummer,biGleichstandGewinner,aPunktestand);
+
+        //Stichkarten aufdecken für jeden spieler einzeln
+        for(var i=0;i<3;i++){
+
+            //Ablagestapelkarten laden
+            //var aAblagestapel = Spiel.spieler(i).ablagestapel().get_stapel();
+            console.log("strg_spielende: Spieler "+i+" Ablagestapel:"+aAblagestapel )
+
+            //Karten verschieben
+            Spielfeld.karte_vom_ablagestapel_aufdecken(i,aAblagestapel);
+
+        }
+    } else {
+        alert("Das Spiel ist noch nicht zu Ende! Die Ergebnisse können noch nicht abgerufen werden.");
+    }
 }
 
 /*********************************
