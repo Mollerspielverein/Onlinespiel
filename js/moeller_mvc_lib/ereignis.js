@@ -50,8 +50,11 @@ function nachrichtenobject()
 	
 	
 	//4000 Verbindung zum Server
+
 	
 	//5000 Spielserver, Ausführung, Ablauf
+    Ereignisse[5001]={0:5001,1:"Der Spielserver hat eine unbekannte Anweisung erhalten. Daher kann er sie nicht ausführen. Das Spiel wird dabei nicht verändert.",2:"Die Aktion ist dem Spielserver nicht bekannt.",3:"Fehler in der Serverkommunikation"};
+    Ereignisse[5002]={0:5002,1:"Der Spielserver sollte die Ergebnisse eines laufenden Spieles anzeigen. Daher hat er die Ausführung verweigert.",2:"Der Spielserver kann die Daten nicht anzeigen.",3:"Falsche Anfrage an den Server"};
 	
 	//6000 Spielerprofil
 	
@@ -60,14 +63,14 @@ function nachrichtenobject()
 	
 	
 	this.text = function(iN){ // iN = iEreignisnummer
-		if(typeof(Ereignisse[iN])=="undefined")return Ereignisse[1]["2"]+" "+iN+"."
+		if(typeof(Ereignisse[iN])=="undefined")return Ereignisse[1]["2"]+" "+iN+".";
 		return Ereignisse[iN]["2"];
-	}
+	};
 	
 	this.titel = function(iN){
 		if(typeof(Ereignisse[iN])=="undefined")return Ereignisse[1]["3"];
 		return Ereignisse[iN]["3"];
-	}
+	};
 
 
 }
