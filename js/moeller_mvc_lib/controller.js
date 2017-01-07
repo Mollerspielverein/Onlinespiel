@@ -39,7 +39,7 @@ function sendPostToGameServerHelfer(sCommand,sMessage){
             case "init_game":
                 strg_spielbeginn_client(JSON.parse(data));
                 break;
-            case "make_turn":
+            case "make_move":
                 strg_ziehen_client(JSON.parse(data));
                 break;
             case "turn_stack":
@@ -81,7 +81,7 @@ function strg_ziehen(argZugart,argSpielernummer,argSpielerstapel,argBankstapel) 
         // Zug an das Spiel übergben und die Auswertung zurücknehmen
 		// oiZug = Spiel.zug_machen(argSpielernummer, argSpielerstapel, argBankstapel);
 
-        sendPostToGameServerHelfer("make_turn",JSON.stringify({playerId:argSpielernummer,playerStack:argSpielerstapel,vindmillStack:argBankstapel}));
+        sendPostToGameServerHelfer("make_move",JSON.stringify({playerId:argSpielernummer,playerStack:argSpielerstapel,vindmillStack:argBankstapel}));
 
 	} else {
 		// Fehler an das View melden und darstellen lassen.
@@ -135,121 +135,126 @@ function strg_ziehen(argZugart,argSpielernummer,argSpielerstapel,argBankstapel) 
 
 /**
  *
- * @param oZug integer, zugobject
+ * @param argZugliste integer, zobj
  * @returns {*}
  */
 
-function strg_ziehen_client(oZug){
+function strg_ziehen_client(argZugliste){
 
 	/* Prüfung, ob der Zug ungültig war */
-	//noinspection JSUnresolvedVariable
-    if(oZug.errornr!=0){
+    //noinspection JSUnresolvedVariable
+    if(argZugliste[0].errornr!=0){
 
-		//Zug in im View rückgängig machen
-		Spielfeld.zug_zurueckziehen(oZug.iSpielernummer,oZug.iSpielerstapel);
+        //Zug in im View rückgängig machen
+        Spielfeld.zug_zurueckziehen(argZugliste[0].iSpielernummer,argZugliste[0].iSpielerstapel);
 
-		Spielfeld.stapel_zittert(oZug.iBankstapel);
+        Spielfeld.stapel_zittert(argZugliste[0].iBankstapel);
 
-		//Fehler darstellen, durch eine Nachricht
-		Spielfeld.dialog(Nachrichten.text(oZug.errornr));
+        //Fehler darstellen, durch eine Nachricht
+        Spielfeld.dialog(Nachrichten.text(argZugliste[0].errornr));
 
-		//das bankdrehen erlauben, wenn der spieler das darf
-		if(oZug.bDarfStapelDrehen){
-			Spielfeld.bank_drehen_aktivieren();
+        //das bankdrehen erlauben, wenn der spieler das darf
+        if(argZugliste[0].bDarfStapelDrehen){
+            Spielfeld.bank_drehen_aktivieren();
+        }
+
+        Spielfeld.spieler_schaltflaechen_freigeben();
+        //Spielfeld für den Spieler wieder freischalten
+
+        //Funktion enden lassen
+        return void(0);
+    }
+
+	for(var i=0;i<argZugliste.length;i++){
+
+        var oZug=argZugliste[i];
+
+		var argZugart=Spielfeld.get_zugart();
+		var argSpielernummer = oZug.iSpielernummer;
+		var argSpielerstapel = oZug.iSpielerstapel;
+		var argBankstapel = oZug.iBankstapel;
+
+		/* Da der Zug ja gültig ist, werden die Folgen angezeigt!*/
+
+		//Zug im View zu ende führen
+		if(argZugart==MOE_ZUGART_VonStapelZuStapelGezogen){
+			Spielfeld.karte_auflegen(argSpielernummer,argSpielerstapel,argBankstapel);
+		}
+		else if(argZugart==MOE_ZUGART_KarteUndStapelAngeklickt){
+			Spielfeld.karte_ziehen_und_auflegen(argSpielernummer,argSpielerstapel,argBankstapel);
 		}
 
-		Spielfeld.spieler_schaltflaechen_freigeben();
-		//Spielfeld für den Spieler wieder freischalten
-
-		//Funktion enden lassen
-		return void(0);
-	}
-
-    var argZugart=Spielfeld.get_zugart();
-	var argSpielernummer = oZug.iSpielernummer;
-	var argSpielerstapel = oZug.iSpielerstapel;
-	var argBankstapel = oZug.iBankstapel;
-
-	/* Da der Zug ja gültig ist, werden die Folgen angezeigt!*/
-
-	//Zug im View zu ende führen
-	if(argZugart==MOE_ZUGART_VonStapelZuStapelGezogen){
-		Spielfeld.karte_auflegen(argSpielernummer,argSpielerstapel,argBankstapel);
-	}
-	else if(argZugart==MOE_ZUGART_KarteUndStapelAngeklickt){
-		Spielfeld.karte_ziehen_und_auflegen(argSpielernummer,argSpielerstapel,argBankstapel);
-	}
-
-	//wenn der spieler den stich nehmen muss
-	if(oZug.bMussNehmen){
-		Spielfeld.spieler_zieht_ein(argSpielernummer,argBankstapel);
-	}
-
-	//wenn nachziehen, dann nachziehen veranlassen
-	if(oZug.bSpielerHatNachgezogen){
-		Spielfeld.spieler_zieht_nach(argSpielernummer,argSpielerstapel,1);
-		Spielfeld.spieler_zieht_nach(argSpielernummer,argSpielerstapel,oZug.aNachgezogenerKartenstapel[1]);
-		//Spielfeld.spieler_zieht_nach(argSpielernummer,argSpielerstapel,oZug.get_nachgezogenen_kartenstapel().get_obere_karte().get_name());
-	} else {
-		if(oZug.bSpielerstapelGedreht){
-			console.log("strg_ziehen: Spielfeld.spieler_dreht_um("+argSpielernummer+","+oZug.sUmgedrehteKarte+","+argSpielerstapel+")");
-			Spielfeld.spieler_dreht_um(argSpielernummer,oZug.sUmgedrehteKarte,argSpielerstapel);
-			//Spielfeld.spieler_dreht_um(argSpielernummer,oZug.get_umgedrehte_karte().get_name(),argSpielerstapel);
+		//wenn der spieler den stich nehmen muss
+		if(oZug.bMussNehmen){
+			Spielfeld.spieler_zieht_ein(argSpielernummer,argBankstapel);
 		}
-	}
 
-	//wenn bank nachgezogen hat, dann bank nachziehen
-	if(oZug.bBankHatNachgezogen){
-		Spielfeld.bank_zieht_nach(1,argBankstapel);
-		Spielfeld.bank_zieht_nach(oZug.aNachgezogenerBankstapel[0][oZug.aNachgezogenerBankstapel[0].length-1],argBankstapel);
-		//Spielfeld.bank_zieht_nach(oZug.get_nachgezogenen_bankstapel().get_offene_karte().get_name(),argBankstapel);
-	} else {
-		if(oZug.bBankstapelGedreht){
-			//Hier mus snoch eine Änderung rein
-			console.log("strg_ziehen: umgedrehter Stapel:"+oZug.aUmgedrehterStapel);
-			Spielfeld.bank_dreht_um(argBankstapel,oZug.aUmgedrehterStapel);
-			//Spielfeld.bank_dreht_um(argBankstapel,oZug.get_umgedrehten_stapel().get_stapel());
+		//wenn nachziehen, dann nachziehen veranlassen
+		if(oZug.bSpielerHatNachgezogen){
+			Spielfeld.spieler_zieht_nach(argSpielernummer,argSpielerstapel,1);
+			Spielfeld.spieler_zieht_nach(argSpielernummer,argSpielerstapel,oZug.aNachgezogenerKartenstapel[1]);
+			//Spielfeld.spieler_zieht_nach(argSpielernummer,argSpielerstapel,oZug.get_nachgezogenen_kartenstapel().get_obere_karte().get_name());
+		} else {
+			if(oZug.bSpielerstapelGedreht){
+				console.log("strg_ziehen: Spielfeld.spieler_dreht_um("+argSpielernummer+","+oZug.sUmgedrehteKarte+","+argSpielerstapel+")");
+				Spielfeld.spieler_dreht_um(argSpielernummer,oZug.sUmgedrehteKarte,argSpielerstapel);
+				//Spielfeld.spieler_dreht_um(argSpielernummer,oZug.get_umgedrehte_karte().get_name(),argSpielerstapel);
+			}
 		}
-	}
 
-	//Bankstapelpunktes eintragen und offene Karten für Überprüfungen eingeben
-	Spielfeld.set_zug_und_auswertung(oZug);
+		//wenn bank nachgezogen hat, dann bank nachziehen
+		if(oZug.bBankHatNachgezogen){
+			Spielfeld.bank_zieht_nach(1,argBankstapel);
+			Spielfeld.bank_zieht_nach(oZug.aNachgezogenerBankstapel[0][oZug.aNachgezogenerBankstapel[0].length-1],argBankstapel);
+			//Spielfeld.bank_zieht_nach(oZug.get_nachgezogenen_bankstapel().get_offene_karte().get_name(),argBankstapel);
+		} else {
+			if(oZug.bBankstapelGedreht){
+				//Hier mus snoch eine Änderung rein
+				console.log("strg_ziehen: umgedrehter Stapel:"+oZug.aUmgedrehterStapel);
+				Spielfeld.bank_dreht_um(argBankstapel,oZug.aUmgedrehterStapel);
+				//Spielfeld.bank_dreht_um(argBankstapel,oZug.get_umgedrehten_stapel().get_stapel());
+			}
+		}
 
-	//nächsten spieler wählen und dessen id laden
-	var biNaechsterSpieler = oZug.iNaechsterSpielernummer;
+		//Bankstapelpunktes eintragen und offene Karten für Überprüfungen eingeben
+		Spielfeld.set_zug_und_auswertung(oZug);
 
-	console.log("Gibt es einen nächsten Spieler?");
+		//nächsten spieler wählen und dessen id laden
+		var biNaechsterSpieler = oZug.iNaechsterSpielernummer;
 
-	if( typeof(biNaechsterSpieler)=="number" /* Wenn es überhaupt einen nächsten Spieler gibt */){
-        console.log("Nächster Spieler ist "+biNaechsterSpieler);
+		console.log("Gibt es einen nächsten Spieler?");
 
-		//nächsten spieler anzeigen
-		Spielfeld.aktuellen_spieler_anzeigen(biNaechsterSpieler);
+		if( typeof(biNaechsterSpieler)=="number" /* Wenn es überhaupt einen nächsten Spieler gibt */){
+			console.log("Nächster Spieler ist "+biNaechsterSpieler);
 
-		if(oZug.sNaechsterSpielertyp=="kI" /* wenn der nächste spieler ein kI ist,*/){
+			//nächsten spieler anzeigen
+			Spielfeld.aktuellen_spieler_anzeigen(biNaechsterSpieler);
 
-			//dann die nach der Art der kI den entsprechenden Controller wählen
-			Spielfeld.ki_zieht_als_naechstes();
-			//strg_ki_zug(biNaechsterSpieler);
+			if(oZug.sNaechsterSpielertyp=="kI" /* wenn der nächste spieler ein kI ist,*/){
 
-		} else { /* Wenn es keine kI ist, */
+				//dann die nach der Art der kI den entsprechenden Controller wählen
+				//Spielfeld.ki_zieht_als_naechstes();
+				//strg_ki_zug(biNaechsterSpieler);
 
-			//das bankdrehen erlauben, wenn der spieler das darf
-			if(oZug.bNaechsterSpielerDarfDrehen){
-				Spielfeld.bank_drehen_aktivieren();
+			} else { /* Wenn es keine kI ist, */
+
+				//das bankdrehen erlauben, wenn der spieler das darf
+				if(oZug.bNaechsterSpielerDarfDrehen){
+					Spielfeld.bank_drehen_aktivieren();
+				}
+
+				//die interaktionsflächen für den spieler erlauben
+				Spielfeld.spieler_schaltflaechen_freigeben();
+
 			}
 
-			//die interaktionsflächen für den spieler erlauben
-			Spielfeld.spieler_schaltflaechen_freigeben();
-
+		} else {
+			console.log("Das Spielende wird eingeleitet.");
+			// Ende Controller aktivieren
+			strg_spielende();
+			break;
 		}
-
-	} else {
-        console.log("Das Spielende wird eingeleitet.");
-		// Ende Controller aktivieren
-		strg_spielende();
-	}
-
+    }
 }
 
 /*********************************
@@ -363,6 +368,8 @@ function strg_spielbeginn_client(initGameData){
     var spielOptionen = initGameData.spielOptionen;
     var spielModus = initGameData.spielModus;
     var spielType = initGameData.spielType;
+
+
 
     Spielfeld = new spielfeldobject(aMitspieler,spielOptionen,spielModus);
     Spielfeld.spieltyp_anzeige(spielType);
