@@ -15,6 +15,7 @@
   overflow:hidden;
   background-size:100% 99.5%;
   -webkit-background-size:99.5%;
+  -moz-background-size:100%;
   background-position:center center;
   background-repeat:no-repeat;
   -moz-transform: rotateY(0deg);
