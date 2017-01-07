@@ -11,6 +11,8 @@ eval(fs.readFileSync('modell2.js')+'');
 eval(fs.readFileSync('ki.js')+'');
 
 var Spiel;
+var aZugProtokoll = {};
+var aAktuelleZuege = {}
 
 
 /**********************
@@ -101,10 +103,24 @@ var server = http.createServer(function(request, response) {
 
                     response.end(JSON.stringify(initGameData));
                     break;
-                case "make_turn":
-                    var oZug = Spiel.zug_machen(request.post.msg.playerId, request.post.msg.playerStack, request.post.msg.vindmillStack);
-                    console.log(oZug);
-                    response.end(JSON.stringify(oZug));
+                case "make_move":
+                    aAktuelleZuege=new Array();
+                    aAktuelleZuege.push(Spiel.zug_machen(request.post.msg.playerId, request.post.msg.playerStack, request.post.msg.vindmillStack));
+
+                    //Wenn der nächste Spieler eine kI ist
+                    while(aAktuelleZuege[aAktuelleZuege.length-1].sNaechsterSpielertyp=="kI"){
+                        var aEinZug = aAktuelleZuege[aAktuelleZuege.length-1];
+                         //nun soll der kI-Zug ausgeführt werden
+                         if(typeof(o_kI_Engines[Spiel.spieler(aEinZug.iNaechsterSpielernummer).get_spielerid()])!="undefined"){
+                            var aZug = o_kI_Engines["kI/Nora"].apply(o_kI_Engines["kI/Nora"],new Array(Spiel,aEinZug.iNaechsterSpielernummer));
+                        } else {
+                            var aZug = o_kI_Engines[argkI].apply(o_kI_Engines[argkI],new Array(Spiel,argSpielernummer));
+                        }
+                        aAktuelleZuege.push(Spiel.zug_machen(aEinZug.iNaechsterSpielernummer, aZug[0], aZug[1]));
+                    }
+
+                    console.log(aAktuelleZuege);
+                    response.end(JSON.stringify(aAktuelleZuege));
                     break;
                 case "turn_stack":
                     //Wenn der falsche Spieler dran ist!
