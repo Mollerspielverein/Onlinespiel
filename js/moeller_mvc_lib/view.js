@@ -26,11 +26,15 @@ dia
 	
 	*********************************/
 	
-spielfeldobject = function(argMitspieler,argSpielfeldOptionen,argSpieltyp){
+spielfeldobject = function(argSpielId,argMitspieler,argSpielfeldOptionen,argSpieltyp){
 
 	//protokoll("spielfeldobject: Mitspieler"+argMitspieler.join("/"));
 
 	var selbst_Spielfeld = this;
+
+	//Die SpielId kann nur einemal gestezt werden. Das Spielfeld muss also nachder Verbindung zum Server instanziert werden, wenn ein Server gebraucht wird!
+
+	var spielId = argSpielId;
 	var oBank;
 	var oNachziehstapel
 	var biAktuellerSpieler = false;
@@ -131,12 +135,27 @@ spielfeldobject = function(argMitspieler,argSpielfeldOptionen,argSpieltyp){
 		
 		this.naechste_koordinaten = function(iStapelnummer,sModus){
 			var iKartenzahl = $("#ba_"+(iStapelnummer+1)+sModus+" > div").length;
+
+			/*
 			var iLeft=Math.round(3*(iKartenzahl));
 			var iTop=Math.round(3*(iKartenzahl));
-			var iZindex=((sModus=="a"?5:3)-iStapelnummer)*100+iKartenzahl;
-			return new Array(iLeft,iTop,iZindex);
+			*/
+
+            if(iKartenzahl>0){
+                var iLeft=ma_z_rand(-10,10);//Math.round(3*(iKartenzahl));
+                var iTop=ma_z_rand(-10,10);//Math.round(3*(iKartenzahl));
+            } else {
+                var iLeft=Math.round(3*(iKartenzahl));
+                var iTop=Math.round(3*(iKartenzahl));
+            };
+
+            var iZindex=((sModus==="a"?5:3)-iStapelnummer)*100+iKartenzahl;
+            return new Array(iLeft,iTop,iZindex);
+
+
 		}
-		
+
+
 		this.offene_karte_anfuegen = function(iStapelnummer,argKartenname){
 			oSound.hinlegen();
 			var sStapelname="ba_"+(iStapelnummer+1)+"a";
@@ -2854,6 +2873,16 @@ spielfeldobject = function(argMitspieler,argSpielfeldOptionen,argSpieltyp){
 
 	function set_zugart(argZugart){
 		iZugart = argZugart;
+	}
+
+    /*************************
+
+	 	die SpielId laden
+
+     ************************/
+
+    this.get_spielid = function(){
+    	return spielId;
 	}
 
     /*************************

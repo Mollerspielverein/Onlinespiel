@@ -42,6 +42,9 @@ function sendPostToGameServerHelfer(sCommand,sMessage){
             case "make_move":
                 strg_ziehen_client(JSON.parse(data));
                 break;
+			case "get_ki_move":
+                strg_ziehen_client(JSON.parse(data));
+                break;
             case "turn_stack":
                 strg_bank_umdrehen_client(JSON.parse(data));
                 break;
@@ -81,7 +84,7 @@ function strg_ziehen(argZugart,argSpielernummer,argSpielerstapel,argBankstapel) 
         // Zug an das Spiel übergben und die Auswertung zurücknehmen
 		// oiZug = Spiel.zug_machen(argSpielernummer, argSpielerstapel, argBankstapel);
 
-        sendPostToGameServerHelfer("make_move",JSON.stringify({playerId:argSpielernummer,playerStack:argSpielerstapel,vindmillStack:argBankstapel}));
+        sendPostToGameServerHelfer("make_move",JSON.stringify({gameId:Spielfeld.get_spielid(),playerId:argSpielernummer,playerStack:argSpielerstapel,vindmillStack:argBankstapel}));
 
 	} else {
 		// Fehler an das View melden und darstellen lassen.
@@ -177,12 +180,12 @@ function strg_ziehen_client(argZugliste){
 		/* Da der Zug ja gültig ist, werden die Folgen angezeigt!*/
 
 		//Zug im View zu ende führen
-		if(argZugart==MOE_ZUGART_VonStapelZuStapelGezogen){
-			Spielfeld.karte_auflegen(argSpielernummer,argSpielerstapel,argBankstapel);
-		}
-		else if(argZugart==MOE_ZUGART_KarteUndStapelAngeklickt){
+		//if(argZugart==MOE_ZUGART_VonStapelZuStapelGezogen){
+		//	Spielfeld.karte_auflegen(argSpielernummer,argSpielerstapel,argBankstapel);
+		//}
+		//else if(argZugart==MOE_ZUGART_KarteUndStapelAngeklickt){
 			Spielfeld.karte_ziehen_und_auflegen(argSpielernummer,argSpielerstapel,argBankstapel);
-		}
+		//}
 
 		//wenn der spieler den stich nehmen muss
 		if(oZug.bMussNehmen){
@@ -266,7 +269,7 @@ function strg_ziehen_client(argZugliste){
 function strg_bank_umdrehen(argBankstapelnummer, iSpielernummer) {
     // bank drehen von Modell machen lassen und die Karten, die nun offen liegen laden
     //oiDrehZug = Spiel.bankstapel_drehen(argBankstapelnummer);
-    sendPostToGameServerHelfer("turn_stack",JSON.stringify({vindmillStack:argBankstapelnummer,playerId:iSpielernummer}));
+    sendPostToGameServerHelfer("turn_stack",JSON.stringify({gameId:Spielfeld.get_spielid(),vindmillStack:argBankstapelnummer,playerId:iSpielernummer}));
 }
 
 function strg_bank_umdrehen_client(oiDrehZug){
@@ -304,30 +307,32 @@ function strg_bank_umdrehen_client(oiDrehZug){
 
 function strg_ki_zug(argSpielernummer){
 	
-	if(Spiel.spieler(argSpielernummer).get_spielertyp()=="kI"){
+	//if(Spiel.spieler(argSpielernummer).get_spielertyp()=="kI"){
 	
 		//Variablen initialisieren
-		var argkI = Spiel.spieler(argSpielernummer).get_spielerid();
+		//var argkI = Spiel.spieler(argSpielernummer).get_spielerid();
 	
 		//dann aus der kI-ID die kI-Engine wählen
-		if(typeof(o_kI_Engines[argkI])!="undefined" ){
+		//if(typeof(o_kI_Engines[argkI])!="undefined" ){
 		
 			//kI-Engine aufrufen und den Zug zurück laden
 
-		} else {
-			console.log("strg_ki_zug: unbekannte kI("+argkI+") aufgerufen. Rufe stattdessen kI/Nora auf.");
-			argkI="kI/Nora";
-		}
+		//} else {
+		//	console.log("strg_ki_zug: unbekannte kI("+argkI+") aufgerufen. Rufe stattdessen kI/Nora auf.");
+		//	argkI="kI/Nora";
+		//}
 		
-		var aZug = o_kI_Engines[argkI].apply(o_kI_Engines[argkI],new Array(Spiel,argSpielernummer));
+		//var aZug = o_kI_Engines[argkI].apply(o_kI_Engines[argkI],new Array(Spiel,argSpielernummer));
 		
-		iComputerstapel=aZug[0];
-		iBankstapel=aZug[1];
+		//iComputerstapel=aZug[0];
+		//iBankstapel=aZug[1];
 		
 		//den Zug an den Controller "Ziehen" melden!
-		strg_ziehen(MOE_ZUGART_ComputerZiehtEineKarte,argSpielernummer,iComputerstapel,iBankstapel);
+		//strg_ziehen(MOE_ZUGART_ComputerZiehtEineKarte,argSpielernummer,iComputerstapel,iBankstapel);
+
+        sendPostToGameServerHelfer("get_ki_move",JSON.stringify({gameId:Spielfeld.get_spielid(),playerId:argSpielernummer}));
 		
-	} else throw "Fehler: kI-Zug-Funktion aufgerufen, obwohl der Spieler "+argSpielernummer+" keine kI ist.";
+	//} else throw "Fehler: kI-Zug-Funktion aufgerufen, obwohl der Spieler "+argSpielernummer+" keine kI ist.";
 }
 
 /*********************************
@@ -368,11 +373,13 @@ function strg_spielbeginn_client(initGameData){
     var spielOptionen = initGameData.spielOptionen;
     var spielModus = initGameData.spielModus;
     var spielType = initGameData.spielType;
+	var spieldId = initGameData.spielId;
 
 
 
-    Spielfeld = new spielfeldobject(aMitspieler,spielOptionen,spielModus);
-    Spielfeld.spieltyp_anzeige(spielType);
+
+    Spielfeld = new spielfeldobject(spieldId,aMitspieler,spielOptionen,spielModus);
+    Spielfeld.spieltyp_anzeige(spielType+" ("+spieldId+")");
 
 	//ersten spieler im Spielfeld festlegen
 	Spielfeld.aktuellen_spieler_anzeigen(iErsterSpieler);
@@ -417,7 +424,7 @@ function strg_spielbeginn_client(initGameData){
 
 function strg_spielende() {
 
-    sendPostToGameServerHelfer("get_results",JSON.stringify({}));
+    sendPostToGameServerHelfer("get_results",JSON.stringify({gameId:Spielfeld.get_spielid()}));
 }
 
 function strg_spielende_client(oErgebnisse){
