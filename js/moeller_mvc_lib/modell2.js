@@ -1368,9 +1368,9 @@ spielobject = function(arg_SpielID,arg_oBlatt,argAlleSpieler)
 	function get_bedienpflicht(iSpielernummer){
 
 		//ergebnis array erzeugen
-		var aBedienpflicht = new Array();
+		var aBedienpflicht = [];//new Array();
 		var oSpieler = selbst.spieler(iSpielernummer);
-		var aMoellerIstDabei = new Array();
+		var aMoellerIstDabei = [];//new Array();
 
 		//in einer Forschleife
 		for(var i=0;i<3;i++){
@@ -1400,7 +1400,7 @@ spielobject = function(arg_SpielID,arg_oBlatt,argAlleSpieler)
 			}
 		}
 
-		//protokoll("get_bedienpflicht: Bedienpflicht oMø:"+aBedienpflicht[0]+" Mø:"+aMoellerIstDabei);
+		console.log("("+selbst.get_spielid()+")get_bedienpflicht: Bedienpflicht oMø:"+aBedienpflicht[0]+" Mø:"+aMoellerIstDabei);
 
 		//Wenn eine der anderen Karten bedienen muss, dann muss der Møller noch dazu gerechnet werden.
 		if((aBedienpflicht[0].length!=0 || aBedienpflicht[1].length!=0 || aBedienpflicht[2].length!=0) && aMoellerIstDabei.length>0){
