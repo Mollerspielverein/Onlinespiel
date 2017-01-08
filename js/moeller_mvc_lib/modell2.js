@@ -1377,6 +1377,7 @@ spielobject = function(arg_SpielID,arg_oBlatt,argAlleSpieler)
 
 			//für jede Karte des Spielers
 			aBedienpflicht.push(new Array());
+			//sd
 
 			for(var j=0;j<3;j++){
 
