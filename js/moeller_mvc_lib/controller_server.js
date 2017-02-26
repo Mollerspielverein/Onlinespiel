@@ -13,6 +13,14 @@ eval(fs.readFileSync('ki.js')+'');
 var Spiel;
 var oSpiele ={};
 
+/**
+ * 
+ * oSpiele
+ * [Spiel]
+ * [Zuege]
+ * 
+ */
+
 /**********************
  *
  *       Server
@@ -44,7 +52,8 @@ function processPost(request, response, callback) {
     }
 }
 
-var hostname = '10.0.18.19';
+//var hostname = '10.0.18.19';
+hostname="localhost"
 var port =3000;
 
 var server = http.createServer(function(request, response) {
@@ -86,28 +95,32 @@ var server = http.createServer(function(request, response) {
 
                     //
                     //Spiel = new spielobject(,init_oBlatt,aDieMitspieler);
-                    oSpiele[neueSpielId] = new spielobject(neueSpielId,init_oBlatt,aDieMitspieler);
+                    oSpiele[neueSpielId]={};
+                    oSpiele[neueSpielId]["game"] = new spielobject(neueSpielId,
+                                                            new bobj(["e","g","h","s"],["9","t","U","O","K","A"],{ "M":7 ,"A": 6, "K": 5, "O": 4, "U": 3, "t": 2, "9": 1 },{ "A": 11, "K": 4, "O": 3, "U": 2, "t": 10, "9": 0 },2),
+                                                            aDieMitspieler);
+                    oSpiele[neueSpielId]["moves"]=new Array();
                     //Spiel.set_spielmodus(MOE_SPIELTYP_Ramsch);
-                    oSpiele[neueSpielId].set_spielmodus(MOE_SPIELTYP_Ramsch);
+                    oSpiele[neueSpielId]["game"].set_spielmodus(MOE_SPIELTYP_Ramsch);
 
-                    initGameData["spielId"]=oSpiele[neueSpielId].get_spielid();
+                    initGameData["spielId"]=oSpiele[neueSpielId]["game"].get_spielid();
 
 
                     //geben und im view anzeigen
-                    initGameData["offeneKarten"]  = oSpiele[neueSpielId].karten_geben();
-                    initGameData["kartenAufDemNachziehStapel"] = oSpiele[neueSpielId].get_nachziehstapel_startkartenzahl();
+                    initGameData["offeneKarten"]  = oSpiele[neueSpielId]["game"].karten_geben();
+                    initGameData["kartenAufDemNachziehStapel"] = oSpiele[neueSpielId]["game"].get_nachziehstapel_startkartenzahl();
 
                     //vorersten spieler festlegen
-                    oSpiele[neueSpielId].get_aktuellen_spieler();
+                    oSpiele[neueSpielId]["game"].get_aktuellen_spieler();
 
                     //holt den nächsten spieler, den echten ersten spieler aus dem modell, ohne den aktuellen spieler im modell weiterzusetzen, wird wegen get_offene_karten gebraucht --> workaround muss dann mal weg
-                    initGameData["ersterSpieler"] = oSpiele[neueSpielId].get_naechsten_spieler();
+                    initGameData["ersterSpieler"] = oSpiele[neueSpielId]["game"].get_naechsten_spieler();
 
-                    initGameData["ersterSpielerTyp"] = oSpiele[neueSpielId].spieler(initGameData["ersterSpieler"]).get_spielertyp();
-                    initGameData["ersterSpielerDarfStapelDrehen"] = oSpiele[neueSpielId].spieler(initGameData["ersterSpieler"]).darf_stapel_drehen();
+                    initGameData["ersterSpielerTyp"] = oSpiele[neueSpielId]["game"].spieler(initGameData["ersterSpieler"]).get_spielertyp();
+                    initGameData["ersterSpielerDarfStapelDrehen"] = oSpiele[neueSpielId]["game"].spieler(initGameData["ersterSpieler"]).darf_stapel_drehen();
 
                     //legt den nächsten spieler auch im modell fest
-                    oSpiele[neueSpielId].naechster_spieler();
+                    oSpiele[neueSpielId]["game"].naechster_spieler();
 
                     response.end(JSON.stringify(initGameData));
                     break;
@@ -115,66 +128,66 @@ var server = http.createServer(function(request, response) {
 
                     var spielId = request.post.msg.gameId;
 
-
-                    aAktuelleZuege=new Array();
-                    aAktuelleZuege.push(oSpiele[spielId].zug_machen(request.post.msg.playerId, request.post.msg.playerStack, request.post.msg.vindmillStack));
+                    oSpiele[spielId]["game"]["moves"]=new Array();
+                    oSpiele[spielId]["game"]["moves"].push(oSpiele[spielId]["game"].zug_machen(request.post.msg.playerId, request.post.msg.playerStack, request.post.msg.vindmillStack));
 
                     //Wenn der nächste Spieler eine kI ist
-                    while(aAktuelleZuege[aAktuelleZuege.length-1].sNaechsterSpielertyp=="kI"){
-                        var aEinZug = aAktuelleZuege[aAktuelleZuege.length-1];
+                    while(oSpiele[spielId]["game"]["moves"][oSpiele[spielId]["game"]["moves"].length-1].sNaechsterSpielertyp=="kI"){
+                        var aEinZug = oSpiele[spielId]["game"]["moves"][oSpiele[spielId]["game"]["moves"].length-1];
                          //nun soll der kI-Zug ausgeführt werden
-                        var kIId = oSpiele[spielId].spieler(aEinZug.iNaechsterSpielernummer).get_spielerid();
+                        var kIId = oSpiele[spielId]["game"].spieler(aEinZug.iNaechsterSpielernummer).get_spielerid();
                          if(typeof(o_kI_Engines[kIId])!="undefined"){
-                            var aZug = o_kI_Engines["kI/Nora"].apply(o_kI_Engines["kI/Nora"],new Array(oSpiele[spielId],aEinZug.iNaechsterSpielernummer));
+                            var aZug = o_kI_Engines["kI/Nora"].apply(o_kI_Engines["kI/Nora"],new Array(oSpiele[spielId]["game"],aEinZug.iNaechsterSpielernummer));
                         } else {
-                            var aZug = o_kI_Engines[kIId].apply(o_kI_Engines[kIId],new Array(oSpiele[spielId],aEinZug.iNaechsterSpielernummer));
+                            var aZug = o_kI_Engines[kIId].apply(o_kI_Engines[kIId],new Array(oSpiele[spielId]["game"],aEinZug.iNaechsterSpielernummer));
                         }
-                        aAktuelleZuege.push(oSpiele[spielId].zug_machen(aEinZug.iNaechsterSpielernummer, aZug[0], aZug[1]));
+                        oSpiele[spielId]["game"]["moves"].push(oSpiele[spielId]["game"].zug_machen(aEinZug.iNaechsterSpielernummer, aZug[0], aZug[1]));
                     }
 
-                    console.log(aAktuelleZuege);
-                    response.end(JSON.stringify(aAktuelleZuege));
+                    console.log(oSpiele[spielId]["game"]["moves"]);
+                    response.end(JSON.stringify(oSpiele[spielId]["game"]["moves"]));
                     break;
                 case "get_ki_move":
 
                     var spielId = request.post.msg.gameId;
-                    aAktuelleZuege=new Array();
+                    oSpiele[spielId]["game"]["moves"]=new Array();
 
                      //nun soll der kI-Zug ausgeführt werden
-                    var kIId = oSpiele[spielId].spieler(request.post.msg.playerId).get_spielerid();
+                    var kIId = oSpiele[spielId]["game"].spieler(request.post.msg.playerId).get_spielerid();
                     if (typeof(o_kI_Engines[kIId]) != "undefined") {
-                        var aZug = o_kI_Engines["kI/Nora"].apply(o_kI_Engines["kI/Nora"], new Array(oSpiele[spielId], request.post.msg.playerId));
+                        var aZug = o_kI_Engines["kI/Nora"].apply(o_kI_Engines["kI/Nora"], new Array(oSpiele[spielId]["game"], request.post.msg.playerId));
                     } else {
-                        var aZug = o_kI_Engines[kIId].apply(o_kI_Engines[kIId], new Array(oSpiele[spielId], request.post.msg.playerId));
+                        var aZug = o_kI_Engines[kIId].apply(o_kI_Engines[kIId], new Array(oSpiele[spielId]["game"], request.post.msg.playerId));
                     }
-                    aAktuelleZuege.push(oSpiele[spielId].zug_machen(request.post.msg.playerId, aZug[0], aZug[1]));
+                    oSpiele[spielId]["game"]["moves"].push(oSpiele[spielId]["game"].zug_machen(request.post.msg.playerId, aZug[0], aZug[1]));
 
-                    //aAktuelleZuege.push(oSpiele[spielId].zug_machen(request.post.msg.playerId, request.post.msg.playerStack, request.post.msg.vindmillStack));
+                    //oSpiele[spielId]["game"]["moves"].push(oSpiele[spielId]["game"].zug_machen(request.post.msg.playerId, request.post.msg.playerStack, request.post.msg.vindmillStack));
 
                     //Wenn der nächste Spieler eine kI ist
-                    while(aAktuelleZuege[aAktuelleZuege.length-1].sNaechsterSpielertyp=="kI") {
-                        var aEinZug = aAktuelleZuege[aAktuelleZuege.length - 1];
+                    while(oSpiele[spielId]["game"]["moves"][oSpiele[spielId]["game"]["moves"].length-1].sNaechsterSpielertyp=="kI") {
+                        var aEinZug = oSpiele[spielId]["game"]["moves"][oSpiele[spielId]["game"]["moves"].length - 1];
                         //nun soll der kI-Zug ausgeführt werden
-                        var kIId = oSpiele[spielId].spieler(aEinZug.iNaechsterSpielernummer).get_spielerid();
+                        var kIId = oSpiele[spielId]["game"].spieler(aEinZug.iNaechsterSpielernummer).get_spielerid();
                         if (typeof(o_kI_Engines[kIId]) != "undefined") {
-                            var aZug = o_kI_Engines["kI/Nora"].apply(o_kI_Engines["kI/Nora"], new Array(oSpiele[spielId], aEinZug.iNaechsterSpielernummer));
+                            var aZug = o_kI_Engines["kI/Nora"].apply(o_kI_Engines["kI/Nora"], new Array(oSpiele[spielId]["game"], aEinZug.iNaechsterSpielernummer));
                         } else {
-                            var aZug = o_kI_Engines[kIId].apply(o_kI_Engines[kIId], new Array(oSpiele[spielId], aEinZug.iNaechsterSpielernummer));
+                            console.log("Mache ki Zug:"+kIId)
+                            var aZug = o_kI_Engines[kIId].apply(o_kI_Engines[kIId], new Array(oSpiele[spielId]["game"], aEinZug.iNaechsterSpielernummer));
                         }
-                        aAktuelleZuege.push(oSpiele[spielId].zug_machen(aEinZug.iNaechsterSpielernummer, aZug[0], aZug[1]));
+                        oSpiele[spielId]["game"]["moves"].push(oSpiele[spielId]["game"].zug_machen(aEinZug.iNaechsterSpielernummer, aZug[0], aZug[1]));
                     }
 
-                    console.log(aAktuelleZuege);
-                    response.end(JSON.stringify(aAktuelleZuege));
+                    console.log(oSpiele[spielId]["game"]["moves"]);
+                    response.end(JSON.stringify(oSpiele[spielId]["game"]["moves"]));
                     break;
                 case "turn_stack":
 
                     var spielId = request.post.msg.gameId;
 
                     //Wenn der falsche Spieler dran ist!
-                    if (oSpiele[spielId].get_aktuellen_spieler() !== request.post.msg.playerId) {response.end(JSON.stringify(3003));}
+                    if (oSpiele[spielId]["game"].get_aktuellen_spieler() !== request.post.msg.playerId) {response.end(JSON.stringify(3003));}
 
-                    var oiDrehZug = oSpiele[spielId].bankstapel_drehen(request.post.msg.vindmillStack);
+                    var oiDrehZug = oSpiele[spielId]["game"].bankstapel_drehen(request.post.msg.vindmillStack);
                     console.log(oiDrehZug);
                     response.end(JSON.stringify(oiDrehZug));
                     break;
@@ -182,13 +195,13 @@ var server = http.createServer(function(request, response) {
 
                     var spielId = request.post.msg.gameId;
 
-                    if(oSpiele[spielId].get_spielstatus()===MOE_STATUS_ENDE) {
+                    if(oSpiele[spielId]["game"].get_spielstatus()===MOE_STATUS_ENDE) {
                         response.end(JSON.stringify({
-                            allePunkte:oSpiele[spielId].get_spieler_punkte(),
+                            allePunkte:oSpiele[spielId]["game"].get_spieler_punkte(),
                             alleAblagestapel:new Array(
-                                oSpiele[spielId].spieler(0).ablagestapel().get_stapel(),
-                                oSpiele[spielId].spieler(1).ablagestapel().get_stapel(),
-                                oSpiele[spielId].spieler(2).ablagestapel().get_stapel()
+                                oSpiele[spielId]["game"].spieler(0).ablagestapel().get_stapel(),
+                                oSpiele[spielId]["game"].spieler(1).ablagestapel().get_stapel(),
+                                oSpiele[spielId]["game"].spieler(2).ablagestapel().get_stapel()
                             )
                         }));
                     } else {

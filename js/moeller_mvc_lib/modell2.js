@@ -265,7 +265,7 @@ function zobj(argSpielernummer,argSpielerstapel,argBankstapel,argSpielerkarte,ar
 
 init_oBlatt = new bobj(["e","g","h","s"],["9","t","U","O","K","A"],{ "M":7 ,"A": 6, "K": 5, "O": 4, "U": 3, "t": 2, "9": 1 },{ "A": 11, "K": 4, "O": 3, "U": 2, "t": 10, "9": 0 },2);
 
-init_SpielID = ma_z_rand(0,1000000000000);
+//init_SpielID = ma_z_rand(0,1000000000000);
 
 
 /* Das Spielobjekt */
@@ -334,7 +334,7 @@ spielobject = function(arg_SpielID,arg_oBlatt,argAlleSpieler)
 		}
 	}
 	
-	Moeller = new mobj();
+	var Moeller = new mobj();
 
 	/********************************
 
@@ -429,7 +429,7 @@ spielobject = function(arg_SpielID,arg_oBlatt,argAlleSpieler)
 			if(typeof(argKarten)!="undefined" && typeof(argPunkte)=="undefined"){
 				for(i=0;i<argKarten.length;i++)
 				{
-					doTemp = new kobj(argKarten[i]);
+					var doTemp = new kobj(argKarten[i]);
 					aKarten.push(argKarten[i]);
 					iAugenzahl = iAugenzahl + doTemp.get_augenzahl();
 					delete doTemp;
@@ -644,7 +644,7 @@ spielobject = function(arg_SpielID,arg_oBlatt,argAlleSpieler)
 
 		this.spieler_muss_nehmen = function(argName){
 			if(argName!="" && !iBankStapelLeer){
-				doTestKarte = new kobj(argName);
+				var doTestKarte = new kobj(argName);
 				// Wenn die oberste Karte der Moeller ist, wenn die oberste Karte bei gleicher Farbe stärker ist, wenn die oberste Karte bei unterschiedlichen farben trumpf ist
 				if(doTestKarte.ist_moeller() && !oOffenerStich.ist_leer())return true;
 				if(oOffenerStich.ist_leer())return false;
@@ -1116,14 +1116,14 @@ spielobject = function(arg_SpielID,arg_oBlatt,argAlleSpieler)
 
 		//Prüfung der Eingabe
 		if(iSpielernummer != selbst.get_aktuellen_spieler()){
-            oNeuerZug = new zobj(iSpielernummer,iSpielerstapel,iBankstapel,"","");
+            var oNeuerZug = new zobj(iSpielernummer,iSpielerstapel,iBankstapel,"","");
             oNeuerZug.errornr=MOE_FEHLER_NichtAktuellerSpielerMachtZug;
             oNeuerZug.bDarfStapelDrehen=aAlleSpieler[iAktuellerSpieler].darf_stapel_drehen();
 			return oNeuerZug;
             //throw "Der Spieler "+iSpielernummer+" hat versucht, einen Zug zu machen, obwohl er nicht dran ist. Es ist Spieler "+selbst.get_aktuellen_spieler()+" an der Reihe.";
         }
 		if( aAlleSpieler[iSpielernummer].kartenstapel(iSpielerstapel).ist_leer()){
-            oNeuerZug = new zobj(iSpielernummer,iSpielerstapel,iBankstapel,"","");
+            var oNeuerZug = new zobj(iSpielernummer,iSpielerstapel,iBankstapel,"","");
             oNeuerZug.errornr=MOE_FEHLER_SpielerZiehtVonLeeremStapel;
             oNeuerZug.bDarfStapelDrehen=aAlleSpieler[iAktuellerSpieler].darf_stapel_drehen();
             return oNeuerZug;
@@ -1141,7 +1141,7 @@ spielobject = function(arg_SpielID,arg_oBlatt,argAlleSpieler)
 				if(!Bank.bankstapel(0).ist_leer() && !Bank.bankstapel(1).ist_leer() && !Bank.bankstapel(2).ist_leer()){
 					if(doSpielerkarte.get_farbe()!=Bank.bankstapel(iBankstapel).get_offene_karte().get_farbe()){
 						if(ma_dotp(aAlleSpieler[iSpielernummer].get_farben_offener_karten(),Bank.get_farben_offener_karten())>0){
-                            oNeuerZug = new zobj(iSpielernummer,iSpielerstapel,iBankstapel,"","");
+                            var oNeuerZug = new zobj(iSpielernummer,iSpielerstapel,iBankstapel,"","");
                             oNeuerZug.errornr=MOE_FEHLER_FalschBedient;
                             oNeuerZug.bDarfStapelDrehen=aAlleSpieler[iAktuellerSpieler].darf_stapel_drehen();
                             return oNeuerZug;
@@ -1154,7 +1154,7 @@ spielobject = function(arg_SpielID,arg_oBlatt,argAlleSpieler)
 		//Zugobjekt erstellen
 
 		doSpielerkarte = aAlleSpieler[iSpielernummer].karte_nehmen(iSpielerstapel);
-		oNeuerZug = new zobj(iSpielernummer,iSpielerstapel,iBankstapel,doSpielerkarte.get_name(),dsBankkarte);
+		var oNeuerZug = new zobj(iSpielernummer,iSpielerstapel,iBankstapel,doSpielerkarte.get_name(),dsBankkarte);
 
 		//Karte auflegen
 		//Erstmal das Ergebnis speichern, da sonst die obersten Karten gleich sind und das ergebnis sinnfrei wäre.
@@ -1259,7 +1259,7 @@ spielobject = function(arg_SpielID,arg_oBlatt,argAlleSpieler)
 			if(aAlleSpieler[iAktuellerSpieler].darf_stapel_drehen()){
 
 				var dSpielerstapel;
-				oNeuerZug = new zobj(iAktuellerSpieler,dSpielerstapel,argBankstapelNummer);
+				var oNeuerZug = new zobj(iAktuellerSpieler,dSpielerstapel,argBankstapelNummer);
 
 				aAlleSpieler[iAktuellerSpieler].dreht_bankstapel();
 				Bank.bankstapel(argBankstapelNummer).drehen();
@@ -1488,7 +1488,7 @@ spielobject = function(arg_SpielID,arg_oBlatt,argAlleSpieler)
 		//protokoll("Ein gemischter, vollständiger Kartenstapel:\n\r\n\r"+aKartenStapel);
 		Blatt.set_moeller(aKartenStapel[0]);
 		//protokoll("Moeller ist:"+Blatt.get_moeller());
-		doKarte = new kobj(aKartenStapel[1]);
+		var doKarte = new kobj(aKartenStapel[1]);
 		//protokoll("Karte "+doKarte.get_name()+" ist Moeller? "+doKarte.ist_moeller() +". Oder Trumpf? "+doKarte.ist_trumpf()+"." );
 	}
 
@@ -1542,7 +1542,7 @@ spielobject = function(arg_SpielID,arg_oBlatt,argAlleSpieler)
 		oZweiterStapel = new stobj(oErsterStapel.get_stapel());
 		oErsterStapel = new stobj(doTempStapel.get_stapel());
 		*/
-		doTempStapel = oZweiterStapel.kopie();
+		var doTempStapel = oZweiterStapel.kopie();
 		oZweiterStapel = oErsterStapel.kopie();
 		oErsterStapel = doTempStapel;
 
@@ -1745,7 +1745,7 @@ spielobject = function(arg_SpielID,arg_oBlatt,argAlleSpieler)
 	}
 
 	this.test_zobj = function(){
-		z = new zobj(0,1,2,"hA","h9");
+		var z = new zobj(0,1,2,"hA","h9");
 
 		z.set_spieler_nimmt_stich(new stobj(new Array("gt","h9","hA")));
 
@@ -1764,7 +1764,7 @@ spielobject = function(arg_SpielID,arg_oBlatt,argAlleSpieler)
 		NachziehStapel.generiere_spielstapel()
 		//protokoll("Nachziehstapel: "+NachziehStapel.get_stapel());
 
-		oBank = new bankobj(NachziehStapel.ziehe_bankstapel(),NachziehStapel.ziehe_bankstapel(),NachziehStapel.ziehe_bankstapel());
+		var oBank = new bankobj(NachziehStapel.ziehe_bankstapel(),NachziehStapel.ziehe_bankstapel(),NachziehStapel.ziehe_bankstapel());
 
 		oKarte1=NachziehStapel.ziehe_karte();
 		oKarte2=NachziehStapel.ziehe_karte();
@@ -1799,11 +1799,11 @@ spielobject = function(arg_SpielID,arg_oBlatt,argAlleSpieler)
 		var NachziehStapel = new nzstobj();
 		NachziehStapel.generiere_spielstapel();
 
-		oBank = new bankobj(NachziehStapel.ziehe_bankstapel(),NachziehStapel.ziehe_bankstapel(),NachziehStapel.ziehe_bankstapel());
+		var oBank = new bankobj(NachziehStapel.ziehe_bankstapel(),NachziehStapel.ziehe_bankstapel(),NachziehStapel.ziehe_bankstapel());
 		//protokoll("Bankstapel: "+oBank.get_stapel().join("/"));
 
 		iSpielerID = ma_z_rand(0,10000000000);
-		oSpieler = new spielerobj(iSpielerID,"Name",NachziehStapel.ziehe_kartenstapel() ,NachziehStapel.ziehe_kartenstapel(),NachziehStapel.ziehe_kartenstapel());
+		var oSpieler = new spielerobj(iSpielerID,"Name",NachziehStapel.ziehe_kartenstapel() ,NachziehStapel.ziehe_kartenstapel(),NachziehStapel.ziehe_kartenstapel());
 
 		//protokoll("Spielerkartenstapel:"+oSpieler.get_stapel().join("/"));
 		//protokoll("Spieler darf die Bank drehen:"+oSpieler.darf_stapel_drehen());
@@ -1823,11 +1823,11 @@ spielobject = function(arg_SpielID,arg_oBlatt,argAlleSpieler)
 		//protokoll("Moeller gesetzt? "+NachziehStapel.set_moeller()+".");
 		//protokoll("Moeller: "+Moeller.get_moeller());
 
-		oBank = new bankobj(NachziehStapel.ziehe_bankstapel(),NachziehStapel.ziehe_bankstapel(),NachziehStapel.ziehe_bankstapel());
+		var oBank = new bankobj(NachziehStapel.ziehe_bankstapel(),NachziehStapel.ziehe_bankstapel(),NachziehStapel.ziehe_bankstapel());
 		//protokoll("Bankstapel: "+oBank.get_stapel().join("/"));
 
-		iSpielerID = ma_z_rand(0,10000000000);
-		oSpieler = new spielerobj(iSpielerID,"Name",NachziehStapel.ziehe_kartenstapel() ,NachziehStapel.ziehe_kartenstapel(),NachziehStapel.ziehe_kartenstapel());
+		var iSpielerID = ma_z_rand(0,10000000000);
+		var oSpieler = new spielerobj(iSpielerID,"Name",NachziehStapel.ziehe_kartenstapel() ,NachziehStapel.ziehe_kartenstapel(),NachziehStapel.ziehe_kartenstapel());
 
 		//protokoll("Spielerkartenstapel:"+oSpieler.get_stapel().join("/"));
 
@@ -1856,11 +1856,11 @@ spielobject = function(arg_SpielID,arg_oBlatt,argAlleSpieler)
 		//protokoll("Moeller gesetzt? "+NachziehStapel.set_moeller()+".");
 		//protokoll("Moeller: "+Moeller.get_moeller());
 
-		oBank = new bankobj(NachziehStapel.ziehe_bankstapel(),NachziehStapel.ziehe_bankstapel(),NachziehStapel.ziehe_bankstapel());
+		var oBank = new bankobj(NachziehStapel.ziehe_bankstapel(),NachziehStapel.ziehe_bankstapel(),NachziehStapel.ziehe_bankstapel());
 		//protokoll("Bankstapel: "+oBank.get_stapel().join("/"));
 
-		iSpielerID = ma_z_rand(0,10000000000);
-		oSpieler = new spielerobj(iSpielerID,"Name",NachziehStapel.ziehe_kartenstapel() ,NachziehStapel.ziehe_kartenstapel(),NachziehStapel.ziehe_kartenstapel());
+		var iSpielerID = ma_z_rand(0,10000000000);
+		var oSpieler = new spielerobj(iSpielerID,"Name",NachziehStapel.ziehe_kartenstapel() ,NachziehStapel.ziehe_kartenstapel(),NachziehStapel.ziehe_kartenstapel());
 
 		//protokoll("Spielerkartenstapel:"+oSpieler.get_stapel().join("/"));
 

@@ -32,7 +32,8 @@ function sendPostToGameServerHelfer(sCommand,sMessage){
 		sMessage=JSON.stringify(sMessage);
     }
 
-    $.post("http://10.0.18.19:3000", JSON.stringify({ctrl:sCommand,msg:sMessage}),function (data) {
+    //$.post("http://10.0.18.19:3000", JSON.stringify({ctrl:sCommand,msg:sMessage}),function (data) {
+    $.post("http://localhost:3000", JSON.stringify({ctrl:sCommand,msg:sMessage}),function (data) {
     	//alert(data)
 
         switch(sCommand){
