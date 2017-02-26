@@ -265,7 +265,7 @@ function zobj(argSpielernummer,argSpielerstapel,argBankstapel,argSpielerkarte,ar
 
 init_oBlatt = new bobj(["e","g","h","s"],["9","t","U","O","K","A"],{ "M":7 ,"A": 6, "K": 5, "O": 4, "U": 3, "t": 2, "9": 1 },{ "A": 11, "K": 4, "O": 3, "U": 2, "t": 10, "9": 0 },2);
 
-//init_SpielID = ma_z_rand(0,1000000000000);
+init_SpielID = 0;//ma_z_rand(0,1000000000000);
 
 
 /* Das Spielobjekt */
